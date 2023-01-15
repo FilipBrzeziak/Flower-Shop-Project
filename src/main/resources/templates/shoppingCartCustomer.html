@@ -3,20 +3,20 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Enter Customer Information</title>
+    <title>Uzupełnij dane dostawy</title>
     <link rel="stylesheet" type="text/css" th:href="@{/styles.css}">
 </head>
 <body>
 <th:block th:include="/_header"></th:block>
 <th:block th:include="/_menu"></th:block>
 
-<div class="page-title">Enter Customer Information</div>
+<div class="page-title">Uzupełnij dane dostawy</div>
 
 <form method="POST" th:object = "${customerForm}" th:action="@{/shoppingCartCustomer}">
 
     <table>
         <tr>
-            <td>Name *</td>
+            <td>Nazwa *</td>
             <td><input th:field="*{name}" /></td>
             <td>
                   <span class="error-message"
@@ -32,7 +32,7 @@
             </td>
         </tr>
         <tr>
-            <td>Phone *</td>
+            <td>Numer tel. *</td>
             <td><input th:field="*{phone}" /></td>
             <td>
                   <span class="error-message"
@@ -40,7 +40,7 @@
             </td>
         </tr>
         <tr>
-            <td>Address *</td>
+            <td>Adres *</td>
             <td><input th:field="*{address}" /></td>
             <td>
                   <span class="error-message"
@@ -49,8 +49,8 @@
         </tr>
         <tr>
             <td>&nbsp;</td>
-            <td><input type="submit" value="Submit" /> <input type="reset"
-                                                              value="Reset" /></td>
+            <td><input type="submit" value="Zatwierdź" /> <input type="reset"
+                                                              value="Wyczyść" /></td>
         </tr>
     </table>
 

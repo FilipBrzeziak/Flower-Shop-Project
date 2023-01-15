@@ -8,14 +8,14 @@
 
     <div class="header-bar">
         <th:block sec:authorize="isAuthenticated()">
-            Hello
+            Witaj
             <a th:href="@{/shop/accountInfo}" th:utext="${#request.userPrincipal.name}">..</a>
             &nbsp;|&nbsp;
-            <a th:href="@{/shop/logout}">Logout</a>
+            <a th:href="@{/shop/logout}">Wyloguj się</a>
         </th:block>
 
         <th:block sec:authorize="!isAuthenticated()">
-            <a th:href="@{/shop/login}">Login</a>
+            <a th:href="@{/shop/login}">Zaloguj się</a>
         </th:block>
     </div>
 

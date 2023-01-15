@@ -43,7 +43,7 @@ body {
     border-top: 1px solid #ccc;
 }
 .menu-container {
-    text-align: right;
+    text-align: left;
     margin: 10px 5px;
 }
 .menu-container a {
