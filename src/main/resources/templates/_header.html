@@ -1,19 +1,21 @@
+<html lang="pl">
+<meta charset="utf-8">
 <div class="header-container"
      xmlns:th="http://www.thymeleaf.org"
      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 
-    <div class="site-name">Online Shop</div>
+    <div class="site-name">Niezapominajka</div>
 
     <div class="header-bar">
         <th:block sec:authorize="isAuthenticated()">
-            Hello
+            Witaj
             <a th:href="@{/shop/accountInfo}" th:utext="${#request.userPrincipal.name}">..</a>
             &nbsp;|&nbsp;
-            <a th:href="@{/shop/logout}">Logout</a>
+            <a th:href="@{/shop/logout}">Wyloguj się</a>
         </th:block>
 
         <th:block sec:authorize="!isAuthenticated()">
-            <a th:href="@{/shop/login}">Login</a>
+            <a th:href="@{/shop/login}">Zaloguj się</a>
         </th:block>
     </div>
 

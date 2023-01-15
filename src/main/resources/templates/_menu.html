@@ -1,19 +1,25 @@
+<html lang="pl">
+<meta charset="utf-8">
 <div class="menu-container"
      xmlns:th="http://www.thymeleaf.org"
      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4" >
-    <a th:href="@{/}">Home</a>
+    <a th:href="@{/}">O nas</a>
     |
     <a th:href="@{/productList}">
-        Product List
+        Oferta
     </a>
     |
     <a th:href="@{/shoppingCart}">
-        My Cart
+        Koszyk
+    </a>
+    |
+    <a th:href="@{/shoppingCart}">
+        Edytuj dane
     </a>
     |
     <th:block sec:authorize="hasAnyRole('ROLE_ADMIN')">
         <a th:href="@{/shop/orderList}">
-            Order List
+            Historia zamówień
         </a>
         |
     </th:block>
@@ -25,7 +31,7 @@
     </th:block>
     <th:block sec:authorize="hasRole('ROLE_ADMIN')">
         <a th:href="@{/shop/product}">
-            Create Product
+            Kreator bukietów
         </a>
         |
     </th:block>
