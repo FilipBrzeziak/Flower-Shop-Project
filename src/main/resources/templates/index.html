@@ -3,24 +3,28 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Books Shop Online</title>
-    <link rel="stylesheet" type="text/css" th:href="@{/styles.css}" />
+    <title>Niezapominajka</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/styles.css}"/>
 </head>
 <body>
 <th:block th:include="/_header"></th:block>
 <th:block th:include="/_menu"></th:block>
 
-<div class="page-title">Shopping Cart Demo</div>
+<div class="page-title">Kwiaciarnia Niezapominajka</div>
 <div class="demo-container">
-    <h3>Demo content</h3>
+    <h2>O Nas</h2>
+    <h3>W naszej ofercie można znaleźć: </h3>
     <ul>
-        <li>Buy online</li>
-        <li>Admin pages</li>
-        <li>Reports</li>
+        <li>Przeglądanie szerokiej gamy produktów:
+            <ul>
+                <li>kwiatów,</li>
+                <li> ozdób,</li>
+                <li>dodatków.</li>
+            </ul>
+        </li>
+        <li>Kreator bukietów</li>
     </ul>
 </div>
-
-<th:block th:include="/_footer"></th:block>
 
 </body>
 </html>
