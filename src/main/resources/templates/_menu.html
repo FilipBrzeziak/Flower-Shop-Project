@@ -1,19 +1,22 @@
+<!DOCTYPE html>
+<html lang="pl">
+<meta charset="utf-8">
 <div class="menu-container"
      xmlns:th="http://www.thymeleaf.org"
      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4" >
-    <a th:href="@{/}">Home</a>
+    <a th:href="@{/}">O Nas</a>
     |
     <a th:href="@{/productList}">
-        Product List
+        Oferta
     </a>
     |
     <a th:href="@{/shoppingCart}">
-        My Cart
+        Koszyk
     </a>
     |
     <th:block sec:authorize="hasAnyRole('ROLE_MANAGER','ROLE_EMPLOYEE')">
         <a th:href="@{/admin/orderList}">
-            Order List
+            Moje zamówienia
         </a>
         |
     </th:block>
