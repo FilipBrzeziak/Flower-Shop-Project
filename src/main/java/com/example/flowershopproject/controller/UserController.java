@@ -4,9 +4,11 @@ import com.example.flowershopproject.dao.OrderDAO;
 import com.example.flowershopproject.dao.ProductDAO;
 import com.example.flowershopproject.entity.Product;
 import com.example.flowershopproject.form.ProductForm;
+import com.example.flowershopproject.model.AccountInfo;
 import com.example.flowershopproject.model.OrderDetailInfo;
 import com.example.flowershopproject.model.OrderInfo;
 import com.example.flowershopproject.pagination.PaginationResult;
+import com.example.flowershopproject.service.UserDetailsServiceImpl;
 import com.example.flowershopproject.validator.ProductFormValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -30,6 +32,8 @@ public class UserController {
 
     @Autowired
     private ProductDAO productDAO;
+    @Autowired
+    private UserDetailsServiceImpl userDetailsService;
 
     @Autowired
     private ProductFormValidator productFormValidator;
@@ -54,11 +58,19 @@ public class UserController {
 
     @RequestMapping(value = { "/shop/accountInfo" }, method = RequestMethod.GET)
     public String accountInfo(Model model) {
-        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        System.out.println(userDetails.getPassword());
-        System.out.println(userDetails.getUsername());
-        System.out.println(userDetails.isEnabled());
+        UserDetails simpleDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        UserDetails userToReturn = userDetailsService.loadUserByUsername(simpleDetails.getUsername());
+        AccountInfo userDetails = new AccountInfo(userToReturn.getUsername(), userToReturn.isEnabled());
         model.addAttribute("userDetails", userDetails);
+        return "accountInfo";
+    }
+
+    @RequestMapping(value = { "/shop/accountDetails" }, method = RequestMethod.GET)
+    public String accountDetails(Model model) {
+        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        UserDetails userToReturn = userDetailsService.loadUserByUsername(userDetails.getUsername());
+        AccountInfo accountInfo = new AccountInfo(userToReturn.getUsername(), userToReturn.isEnabled());
+        model.addAttribute("accountInfo", accountInfo);
         return "accountInfo";
     }
 

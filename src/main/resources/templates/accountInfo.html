@@ -13,13 +13,8 @@
 <div class="page-title">Account Info</div>
 <div class="account-container">
     <ul>
-        <li>User Name: <span th:utext="${#request.userPrincipal.name}"></span></li>
-        <li>
-            Role:
-            <ul>
-                <li th:each="auth : ${userDetails.authorities}" th:utext="${auth.authority}"></li>
-            </ul>
-        </li>
+        <li>User Name:<span th:utext="${userDetails.getUserName()}"></span></li>
+        <li>Is Active:<span th:utext="${userDetails.isActive()}"></span></li>
     </ul>
 </div>
 
