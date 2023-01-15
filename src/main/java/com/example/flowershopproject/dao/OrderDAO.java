@@ -30,7 +30,7 @@ public class OrderDAO {
         String sql = "Select max(o.orderNum) from " + Order.class.getName() + " o ";
         Session session = this.sessionFactory.getCurrentSession();
         Query<Integer> query = session.createQuery(sql, Integer.class);
-        Integer value = (Integer) query.getSingleResult();
+        Integer value = query.getSingleResult();
         if (value == null) {
             return 0;
         }
@@ -74,23 +74,34 @@ public class OrderDAO {
             session.persist(detail);
         }
 
-        // Order Number!
         cartInfo.setOrderNum(orderNum);
-        // Flush
         session.flush();
     }
 
-    // @page = 1, 2, ...
     public PaginationResult<OrderInfo> listOrderInfo(int page, int maxResult, int maxNavigationPage) {
-        String sql = "Select new " + OrderInfo.class.getName()//
+        String sql = "Select new " + OrderInfo.class.getName()
                 + "(ord.id, ord.orderDate, ord.orderNum, ord.amount, "
                 + " ord.customerName, ord.customerAddress, ord.customerEmail, ord.customerPhone) " + " from "
-                + Order.class.getName() + " ord "//
+                + Order.class.getName() + " ord "
                 + " order by ord.orderNum desc";
 
         Session session = this.sessionFactory.getCurrentSession();
         Query<OrderInfo> query = session.createQuery(sql, OrderInfo.class);
-        return new PaginationResult<OrderInfo>(query, page, maxResult, maxNavigationPage);
+        return new PaginationResult<>(query, page, maxResult, maxNavigationPage);
+    }
+
+    public PaginationResult<OrderInfo> listOrderInfoForSingleUser(int page, int maxResult, int maxNavigationPage
+            , String selectedCustomerName) {
+        String sql = "Select new " + OrderInfo.class.getName()
+                + "(ord.id, ord.orderDate, ord.orderNum, ord.amount, "
+                + " ord.customerName, ord.customerAddress, ord.customerEmail, ord.customerPhone) " + " from "
+                + Order.class.getName() + " ord " + "where ord.customerName=" + "'" +selectedCustomerName+"'";
+
+
+        Session session = this.sessionFactory.getCurrentSession();
+        Query<OrderInfo> query = session.createQuery(sql, OrderInfo.class);
+        // query.setParameter("selectedCustomerEmail", selectedCustomerEmail);
+        return new PaginationResult<>(query, page, maxResult, maxNavigationPage);
     }
 
     public Order findOrder(String orderId) {
@@ -103,15 +114,15 @@ public class OrderDAO {
         if (order == null) {
             return null;
         }
-        return new OrderInfo(order.getId(), order.getOrderDate(), //
-                order.getOrderNum(), order.getAmount(), order.getCustomerName(), //
+        return new OrderInfo(order.getId(), order.getOrderDate(),
+                order.getOrderNum(), order.getAmount(), order.getCustomerName(),
                 order.getCustomerAddress(), order.getCustomerEmail(), order.getCustomerPhone());
     }
 
     public List<OrderDetailInfo> listOrderDetailInfos(String orderId) {
-        String sql = "Select new " + OrderDetailInfo.class.getName() //
-                + "(d.id, d.product.code, d.product.name , d.quanity,d.price,d.amount) "//
-                + " from " + OrderDetail.class.getName() + " d "//
+        String sql = "Select new " + OrderDetailInfo.class.getName()
+                + "(d.id, d.product.code, d.product.name , d.quanity,d.price,d.amount) "
+                + " from " + OrderDetail.class.getName() + " d "
                 + " where d.order.id = :orderId ";
 
         Session session = this.sessionFactory.getCurrentSession();

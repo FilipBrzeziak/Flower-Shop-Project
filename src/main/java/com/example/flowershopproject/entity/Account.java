@@ -1,5 +1,6 @@
 package com.example.flowershopproject.entity;
 
+import java.io.Serial;
 import java.io.Serializable;
 
 import javax.persistence.Column;
@@ -11,10 +12,8 @@ import javax.persistence.Table;
 @Table(name = "Accounts")
 public class Account implements Serializable {
 
+    @Serial
     private static final long serialVersionUID = -2054386655979281969L;
-
-    public static final String ROLE_MANAGER = "MANAGER";
-    public static final String ROLE_EMPLOYEE = "EMPLOYEE";
 
     @Id
     @Column(name = "User_Name", length = 20, nullable = false)

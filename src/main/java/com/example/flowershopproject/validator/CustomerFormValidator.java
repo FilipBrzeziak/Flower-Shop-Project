@@ -9,10 +9,8 @@ import org.springframework.validation.Validator;
 
 @Component
 public class CustomerFormValidator implements Validator {
+    private final EmailValidator emailValidator = EmailValidator.getInstance();
 
-    private EmailValidator emailValidator = EmailValidator.getInstance();
-
-    // This validator only checks for the CustomerForm.
     @Override
     public boolean supports(Class<?> clazz) {
         return clazz == CustomerForm.class;
@@ -22,7 +20,6 @@ public class CustomerFormValidator implements Validator {
     public void validate(Object target, Errors errors) {
         CustomerForm custInfo = (CustomerForm) target;
 
-        // Check the fields of CustomerForm.
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "name", "NotEmpty.customerForm.name");
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "email", "NotEmpty.customerForm.email");
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "address", "NotEmpty.customerForm.address");

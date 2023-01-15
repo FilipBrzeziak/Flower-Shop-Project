@@ -8,7 +8,6 @@ import com.example.flowershopproject.model.OrderDetailInfo;
 import com.example.flowershopproject.model.OrderInfo;
 import com.example.flowershopproject.pagination.PaginationResult;
 import com.example.flowershopproject.validator.ProductFormValidator;
-import org.apache.el.util.ExceptionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -19,13 +18,12 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 
 @Controller
 @Transactional
-public class AdminController {
+public class UserController {
 
     @Autowired
     private OrderDAO orderDAO;
@@ -49,45 +47,57 @@ public class AdminController {
         }
     }
 
-    // GET: Show Login Page
-    @RequestMapping(value = { "/admin/login" }, method = RequestMethod.GET)
-    public String login(Model model) {
-
+    @RequestMapping(value = { "/shop/login" }, method = RequestMethod.GET)
+    public String login() {
         return "login";
     }
 
-    @RequestMapping(value = { "/admin/accountInfo" }, method = RequestMethod.GET)
+    @RequestMapping(value = { "/shop/accountInfo" }, method = RequestMethod.GET)
     public String accountInfo(Model model) {
-
         UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         System.out.println(userDetails.getPassword());
         System.out.println(userDetails.getUsername());
         System.out.println(userDetails.isEnabled());
-
         model.addAttribute("userDetails", userDetails);
         return "accountInfo";
     }
 
-    @RequestMapping(value = { "/admin/orderList" }, method = RequestMethod.GET)
-    public String orderList(Model model, //
-                            @RequestParam(value = "page", defaultValue = "1") String pageStr) {
+    @RequestMapping(value = { "/shop/userOrderList" }, method = RequestMethod.GET)
+    public String userOrderList(Model model, @RequestParam(value = "page", defaultValue = "1") String pageStr) {
+        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         int page = 1;
         try {
             page = Integer.parseInt(pageStr);
         } catch (Exception e) {
+            System.out.print(e.getMessage());
         }
         final int MAX_RESULT = 5;
         final int MAX_NAVIGATION_PAGE = 10;
 
-        PaginationResult<OrderInfo> paginationResult //
-                = orderDAO.listOrderInfo(page, MAX_RESULT, MAX_NAVIGATION_PAGE);
+        PaginationResult<OrderInfo> paginationResult = orderDAO.listOrderInfoForSingleUser(page, MAX_RESULT, MAX_NAVIGATION_PAGE, userDetails.getUsername());
 
         model.addAttribute("paginationResult", paginationResult);
         return "orderList";
     }
 
-    // GET: Show product.
-    @RequestMapping(value = { "/admin/product" }, method = RequestMethod.GET)
+    @RequestMapping(value = { "/shop/orderList" }, method = RequestMethod.GET)
+    public String orderList(Model model, @RequestParam(value = "page", defaultValue = "1") String pageStr) {
+        int page = 1;
+        try {
+            page = Integer.parseInt(pageStr);
+        } catch (Exception e) {
+            System.out.print(e.getMessage());
+        }
+        final int MAX_RESULT = 5;
+        final int MAX_NAVIGATION_PAGE = 10;
+
+        PaginationResult<OrderInfo> paginationResult = orderDAO.listOrderInfo(page, MAX_RESULT, MAX_NAVIGATION_PAGE);
+
+        model.addAttribute("paginationResult", paginationResult);
+        return "orderList";
+    }
+
+    @RequestMapping(value = { "/shop/product" }, method = RequestMethod.GET)
     public String product(Model model, @RequestParam(value = "code", defaultValue = "") String code) {
         ProductForm productForm = null;
 
@@ -105,13 +115,9 @@ public class AdminController {
         return "product";
     }
 
-    // POST: Save product
-    @RequestMapping(value = { "/admin/product" }, method = RequestMethod.POST)
-    public String productSave(Model model, //
-                              @ModelAttribute("productForm") @Validated ProductForm productForm, //
-                              BindingResult result, //
-                              final RedirectAttributes redirectAttributes) {
-
+    @RequestMapping(value = { "/shop/product" }, method = RequestMethod.POST)
+    public String productSave(Model model, @ModelAttribute("productForm") @Validated ProductForm productForm,
+                              BindingResult result) {
         if (result.hasErrors()) {
             return "product";
         }
@@ -120,21 +126,19 @@ public class AdminController {
         } catch (Exception e) {
             String message = e.getMessage();
             model.addAttribute("errorMessage", message);
-            // Show product form.
             return "product";
         }
-
         return "redirect:/productList";
     }
 
-    @RequestMapping(value = { "/admin/order" }, method = RequestMethod.GET)
+    @RequestMapping(value = { "/shop/order" }, method = RequestMethod.GET)
     public String orderView(Model model, @RequestParam("orderId") String orderId) {
         OrderInfo orderInfo = null;
         if (orderId != null) {
             orderInfo = this.orderDAO.getOrderInfo(orderId);
         }
         if (orderInfo == null) {
-            return "redirect:/admin/orderList";
+            return "redirect:/shop/orderList";
         }
         List<OrderDetailInfo> details = this.orderDAO.listOrderDetailInfos(orderId);
         orderInfo.setDetails(details);

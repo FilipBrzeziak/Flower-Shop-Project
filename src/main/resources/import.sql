@@ -50,17 +50,17 @@ alter table ORDER_DETAILS
             references PRODUCTS (CODE);
 insert into Accounts (USER_NAME, ACTIVE, ENCRYTED_PASSWORD, USER_ROLE)
 values (
-           'employee1',
+           'user',
            1,
            '$2a$10$PrI5Gk9L.tSZiW9FXhTS8O8Mz9E97k2FZbFvGFFaSsiTUIl.TCrFu',
-           'ROLE_EMPLOYEE'
+           'ROLE_CLIENT'
        );
 insert into Accounts (USER_NAME, ACTIVE, ENCRYTED_PASSWORD, USER_ROLE)
 values (
-           'manager1',
+           'admin',
            1,
            '$2a$10$PrI5Gk9L.tSZiW9FXhTS8O8Mz9E97k2FZbFvGFFaSsiTUIl.TCrFu',
-           'ROLE_MANAGER'
+           'ROLE_ADMIN'
        );
 insert into products (CODE, NAME, PRICE, CREATE_DATE)
 values (

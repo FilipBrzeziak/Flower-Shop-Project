@@ -1,8 +1,6 @@
 package com.example.flowershopproject.entity;
 
-import com.example.flowershopproject.entity.Order;
-import com.example.flowershopproject.entity.Product;
-
+import java.io.Serial;
 import java.io.Serializable;
 
 import javax.persistence.Column;
@@ -18,6 +16,7 @@ import javax.persistence.Table;
 @Table(name = "Order_Details")
 public class OrderDetail implements Serializable {
 
+    @Serial
     private static final long serialVersionUID = 7550745928843183535L;
 
     @Id
@@ -25,12 +24,12 @@ public class OrderDetail implements Serializable {
     private String id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "ORDER_ID", nullable = false, //
+    @JoinColumn(name = "ORDER_ID", nullable = false, 
             foreignKey = @ForeignKey(name = "ORDER_DETAIL_ORD_FK"))
     private Order order;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "PRODUCT_ID", nullable = false, //
+    @JoinColumn(name = "PRODUCT_ID", nullable = false, 
             foreignKey = @ForeignKey(name = "ORDER_DETAIL_PROD_FK"))
     private Product product;
 

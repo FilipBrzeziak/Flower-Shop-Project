@@ -1,27 +1,24 @@
-<!DOCTYPE html>
-<html lang="pl">
-<meta charset="utf-8">
 <div class="menu-container"
      xmlns:th="http://www.thymeleaf.org"
      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4" >
-    <a th:href="@{/}">O Nas</a>
+    <a th:href="@{/}">Home</a>
     |
     <a th:href="@{/productList}">
-        Oferta
+        Product List
     </a>
     |
     <a th:href="@{/shoppingCart}">
-        Koszyk
+        My Cart
     </a>
     |
-    <th:block sec:authorize="hasAnyRole('ROLE_MANAGER','ROLE_EMPLOYEE')">
-        <a th:href="@{/admin/orderList}">
-            Moje zamówienia
+    <th:block sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_EMPLOYEE')">
+        <a th:href="@{/shop/orderList}">
+            Order List
         </a>
         |
     </th:block>
-    <th:block sec:authorize="hasRole('ROLE_MANAGER')">
-        <a th:href="@{/admin/product}">
+    <th:block sec:authorize="hasRole('ROLE_ADMIN')">
+        <a th:href="@{/shop/product}">
             Create Product
         </a>
         |
