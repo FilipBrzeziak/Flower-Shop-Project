@@ -1,5 +1,6 @@
 package com.example.flowershopproject.entity;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -10,12 +11,11 @@ import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
 @Entity
-@Table(name = "Orders", //
-        uniqueConstraints = { @UniqueConstraint(columnNames = "Order_Num") })
+@Table(name = "Orders", 
+        uniqueConstraints = {@UniqueConstraint(columnNames = "Order_Num")})
 public class Order implements Serializable {
-
+    @Serial
     private static final long serialVersionUID = -2576670215015463100L;
-
     @Id
     @Column(name = "ID", length = 50)
     private String id;

@@ -1,5 +1,6 @@
 package com.example.flowershopproject.entity;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -15,6 +16,7 @@ import javax.persistence.TemporalType;
 @Table(name = "Products")
 public class Product implements Serializable {
 
+    @Serial
     private static final long serialVersionUID = -1000119078147252957L;
 
     @Id

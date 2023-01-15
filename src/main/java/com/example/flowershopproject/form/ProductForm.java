@@ -10,11 +10,10 @@ public class ProductForm {
 
     private boolean newProduct = false;
 
-    // Upload file.
     private MultipartFile fileData;
 
     public ProductForm() {
-        this.newProduct= true;
+        this.newProduct = true;
     }
 
     public ProductForm(Product product) {

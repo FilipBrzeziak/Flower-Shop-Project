@@ -18,7 +18,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -45,15 +44,7 @@ public class MainController {
         }
         System.out.println("Target=" + target);
 
-        // Case update quantity in cart
-        // (@ModelAttribute("cartForm") @Validated CartInfo cartForm)
-        if (target.getClass() == CartInfo.class) {
-
-        }
-
-        // Case save customer information.
-        // (@ModelAttribute @Validated CustomerInfo customerForm)
-        else if (target.getClass() == CustomerForm.class) {
+        if (target.getClass() == CustomerForm.class) {
             dataBinder.setValidator(customerFormValidator);
         }
 
@@ -69,23 +60,21 @@ public class MainController {
         return "index";
     }
 
-    // Product List
-    @RequestMapping({ "/productList" })
-    public String listProductHandler(Model model, //
-                                     @RequestParam(value = "name", defaultValue = "") String likeName,
-                                     @RequestParam(value = "page", defaultValue = "1") int page) {
+    @RequestMapping({"/productList"})
+    public String listProductHandler(Model model, @RequestParam(value = "name", defaultValue = "")
+    String likeName, @RequestParam(value = "page", defaultValue = "1") int page) {
         final int maxResult = 5;
         final int maxNavigationPage = 10;
 
-        PaginationResult<ProductInfo> result = productDAO.queryProducts(page, //
+        PaginationResult<ProductInfo> result = productDAO.queryProducts(page,
                 maxResult, maxNavigationPage, likeName);
 
         model.addAttribute("paginationProducts", result);
         return "productList";
     }
 
-    @RequestMapping({ "/buyProduct" })
-    public String listProductHandler(HttpServletRequest request, Model model, //
+    @RequestMapping({"/buyProduct"})
+    public String listProductHandler(HttpServletRequest request,
                                      @RequestParam(value = "code", defaultValue = "") String code) {
 
         Product product = null;
@@ -93,8 +82,6 @@ public class MainController {
             product = productDAO.findProduct(code);
         }
         if (product != null) {
-
-            //
             CartInfo cartInfo = Utils.getCartInSession(request);
 
             ProductInfo productInfo = new ProductInfo(product);
@@ -105,8 +92,8 @@ public class MainController {
         return "redirect:/shoppingCart";
     }
 
-    @RequestMapping({ "/shoppingCartRemoveProduct" })
-    public String removeProductHandler(HttpServletRequest request, Model model, //
+    @RequestMapping({"/shoppingCartRemoveProduct"})
+    public String removeProductHandler(HttpServletRequest request,
                                        @RequestParam(value = "code", defaultValue = "") String code) {
         Product product = null;
         if (code != null && code.length() > 0) {
@@ -125,10 +112,8 @@ public class MainController {
         return "redirect:/shoppingCart";
     }
 
-    // POST: Update quantity for product in cart
-    @RequestMapping(value = { "/shoppingCart" }, method = RequestMethod.POST)
-    public String shoppingCartUpdateQty(HttpServletRequest request, //
-                                        Model model, //
+    @RequestMapping(value = {"/shoppingCart"}, method = RequestMethod.POST)
+    public String shoppingCartUpdateQty(HttpServletRequest request,
                                         @ModelAttribute("cartForm") CartInfo cartForm) {
 
         CartInfo cartInfo = Utils.getCartInSession(request);
@@ -137,8 +122,7 @@ public class MainController {
         return "redirect:/shoppingCart";
     }
 
-    // GET: Show cart.
-    @RequestMapping(value = { "/shoppingCart" }, method = RequestMethod.GET)
+    @RequestMapping(value = {"/shoppingCart"}, method = RequestMethod.GET)
     public String shoppingCartHandler(HttpServletRequest request, Model model) {
         CartInfo myCart = Utils.getCartInSession(request);
 
@@ -146,8 +130,7 @@ public class MainController {
         return "shoppingCart";
     }
 
-    // GET: Enter customer information.
-    @RequestMapping(value = { "/shoppingCartCustomer" }, method = RequestMethod.GET)
+    @RequestMapping(value = {"/shoppingCartCustomer"}, method = RequestMethod.GET)
     public String shoppingCartCustomerForm(HttpServletRequest request, Model model) {
 
         CartInfo cartInfo = Utils.getCartInSession(request);
@@ -165,17 +148,13 @@ public class MainController {
         return "shoppingCartCustomer";
     }
 
-    // POST: Save customer information.
-    @RequestMapping(value = { "/shoppingCartCustomer" }, method = RequestMethod.POST)
-    public String shoppingCartCustomerSave(HttpServletRequest request, //
-                                           Model model, //
-                                           @ModelAttribute("customerForm") @Validated CustomerForm customerForm, //
-                                           BindingResult result, //
-                                           final RedirectAttributes redirectAttributes) {
+    @RequestMapping(value = {"/shoppingCartCustomer"}, method = RequestMethod.POST)
+    public String shoppingCartCustomerSave(HttpServletRequest request,
+                                           @ModelAttribute("customerForm") @Validated CustomerForm customerForm,
+                                           BindingResult result) {
 
         if (result.hasErrors()) {
             customerForm.setValid(false);
-            // Forward to reenter customer info.
             return "shoppingCartCustomer";
         }
 
@@ -187,16 +166,13 @@ public class MainController {
         return "redirect:/shoppingCartConfirmation";
     }
 
-    // GET: Show information to confirm.
-    @RequestMapping(value = { "/shoppingCartConfirmation" }, method = RequestMethod.GET)
+    @RequestMapping(value = {"/shoppingCartConfirmation"}, method = RequestMethod.GET)
     public String shoppingCartConfirmationReview(HttpServletRequest request, Model model) {
         CartInfo cartInfo = Utils.getCartInSession(request);
 
-        if (cartInfo == null || cartInfo.isEmpty()) {
-
+        if (cartInfo.isEmpty()) {
             return "redirect:/shoppingCart";
         } else if (!cartInfo.isValidCustomer()) {
-
             return "redirect:/shoppingCartCustomer";
         }
         model.addAttribute("myCart", cartInfo);
@@ -204,10 +180,9 @@ public class MainController {
         return "shoppingCartConfirmation";
     }
 
-    // POST: Submit Cart (Save)
-    @RequestMapping(value = { "/shoppingCartConfirmation" }, method = RequestMethod.POST)
+    @RequestMapping(value = {"/shoppingCartConfirmation"}, method = RequestMethod.POST)
 
-    public String shoppingCartConfirmationSave(HttpServletRequest request, Model model) {
+    public String shoppingCartConfirmationSave(HttpServletRequest request) {
         CartInfo cartInfo = Utils.getCartInSession(request);
 
         if (cartInfo.isEmpty()) {
@@ -224,20 +199,16 @@ public class MainController {
             return "shoppingCartConfirmation";
         }
 
-        // Remove Cart from Session.
         Utils.removeCartInSession(request);
 
-        // Store last cart.
         Utils.storeLastOrderedCartInSession(request, cartInfo);
 
         return "redirect:/shoppingCartFinalize";
     }
 
-    @RequestMapping(value = { "/shoppingCartFinalize" }, method = RequestMethod.GET)
+    @RequestMapping(value = {"/shoppingCartFinalize"}, method = RequestMethod.GET)
     public String shoppingCartFinalize(HttpServletRequest request, Model model) {
-
         CartInfo lastOrderedCart = Utils.getLastOrderedCartInSession(request);
-
         if (lastOrderedCart == null) {
             return "redirect:/shoppingCart";
         }
@@ -245,9 +216,8 @@ public class MainController {
         return "shoppingCartFinalize";
     }
 
-    @RequestMapping(value = { "/productImage" }, method = RequestMethod.GET)
-    public void productImage(HttpServletRequest request, HttpServletResponse response, Model model,
-                             @RequestParam("code") String code) throws IOException {
+    @RequestMapping(value = {"/productImage"}, method = RequestMethod.GET)
+    public void productImage(HttpServletResponse response, @RequestParam("code") String code) throws IOException {
         Product product = null;
         if (code != null) {
             product = this.productDAO.findProduct(code);
