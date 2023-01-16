@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="pl">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Informacje o koncie</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/styles.css}">
+</head>
+<body>
+
+<th:block th:include="/_header"></th:block>
+<th:block th:include="/_menu"></th:block>
+
+<div class="page-title">Informacje o koncie</div>
+<form method="PUT" th:object="${accountInfo}" th:action="@{/shop/editAccountDetails}">
+
+    <div class="account-container">
+        <ul>
+            <li>Nowy email:
+                <td><input th:field=""/></td>
+            </li>
+            <li>Nowy numer telefonu:
+                <td><input th:field=""/></td>
+                </span></li>
+            <li>Nowy adres:
+                <td><input th:field=""/></td>
+                </span></li>
+            <li>Nowe imię:
+                <td><input th:field=""/></td>
+            </li>
+            <li>Nowe nazwisko:
+                <td><input th:field=""/></td>
+                </span></li>
+            <li>Nowe miasto:
+                <td><input th:field=""/></td>
+                </span></li>
+
+        </ul>
+    </div>
+
+</form>
+</body>
+</html>

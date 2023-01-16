@@ -1,7 +1,9 @@
 package com.example.flowershopproject.controller;
 
+import com.example.flowershopproject.dao.AccountDAO;
 import com.example.flowershopproject.dao.OrderDAO;
 import com.example.flowershopproject.dao.ProductDAO;
+import com.example.flowershopproject.entity.Account;
 import com.example.flowershopproject.entity.Product;
 import com.example.flowershopproject.form.ProductForm;
 import com.example.flowershopproject.model.AccountInfo;
@@ -29,7 +31,8 @@ public class UserController {
 
     @Autowired
     private OrderDAO orderDAO;
-
+    @Autowired
+    private AccountDAO accountDAO;
     @Autowired
     private ProductDAO productDAO;
     @Autowired
@@ -59,19 +62,18 @@ public class UserController {
     @RequestMapping(value = { "/shop/accountInfo" }, method = RequestMethod.GET)
     public String accountInfo(Model model) {
         UserDetails simpleDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        UserDetails userToReturn = userDetailsService.loadUserByUsername(simpleDetails.getUsername());
-        AccountInfo userDetails = new AccountInfo(userToReturn.getUsername(), userToReturn.isEnabled());
+        Account account = accountDAO.findAccount(simpleDetails.getUsername());
+        AccountInfo userDetails = new AccountInfo(account.getUserName(), account.isActive(), account.getEmail(),
+                account.getPhone(), account.getFirstName(), account.getLastName(), account.getUserAddress(),
+                account.getUserCity());
         model.addAttribute("userDetails", userDetails);
         return "accountInfo";
     }
 
-    @RequestMapping(value = { "/shop/accountDetails" }, method = RequestMethod.GET)
-    public String accountDetails(Model model) {
-        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        UserDetails userToReturn = userDetailsService.loadUserByUsername(userDetails.getUsername());
-        AccountInfo accountInfo = new AccountInfo(userToReturn.getUsername(), userToReturn.isEnabled());
-        model.addAttribute("accountInfo", accountInfo);
-        return "accountInfo";
+    @RequestMapping(value = { "/shop/editAccountDetails" }, method = RequestMethod.PUT)
+    public void editAccountDetails(@ModelAttribute("accountInfo") AccountInfo accountInfo ) {
+        UserDetails simpleDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        accountDAO.updateAccount(simpleDetails.getUsername(),accountInfo.getEmail(),accountInfo.getPhoneNumber(),accountInfo.getAddress(),accountInfo.getName(),accountInfo.getLastName(),accountInfo.getCity());
     }
 
     @RequestMapping(value = { "/shop/userOrderList" }, method = RequestMethod.GET)

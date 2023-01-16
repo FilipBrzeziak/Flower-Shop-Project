@@ -44,7 +44,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         boolean accountNonLocked = true;
 
         return new User(account.getUserName(),
-                account.getEncrytedPassword(), enabled, accountNonExpired,
+                account.getEncryptedPassword(), enabled, accountNonExpired,
                 credentialsNonExpired, accountNonLocked, grantList);
     }
 
