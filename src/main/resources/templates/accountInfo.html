@@ -18,6 +18,14 @@
         <li>Status konta:<span th:utext="${userDetails.isActive()}"></span></li>
     </ul>
 </div>
+<div class="customer-data-container" >
+    <ul>
+        <li>Nazwa uzytkownika: <span th:utext="${accountInfo.getUserName()}"></span></li>
+        <li>Email: <span th:utext="${accountInfo.getEmail()}"></span></li>
+        <li>Numer telefonu: <span th:utext="${accountInfo.getPhone()}"></span></li>
+        <li>Adres: <span th:utext="${accountInfo.getAddress())}"></span></li>
+    </ul>
+</div>
 
 
 </body>

@@ -6,7 +6,6 @@ h3 {
     padding: 0px;
 }
 body {
-    max-width: 860px;
     min-width: 360px;
     margin: 0px auto;
     background: #F8F8F8;
@@ -25,15 +24,21 @@ body {
     position: relative;
     background: #7898C5;
     color: white;
+    width:100%;
+}
+.header-bar{
+    text-align: right;
 }
 .header-container .header-bar  {
     position: absolute;
     right: 10px;
     bottom: 20px;
+    width:100%;
 }
 .header-container .header-bar  a  {
     color: white;
     font-size: bold;
+
 }
 
 
@@ -65,6 +70,7 @@ body {
 
 .container  {
     margin: 5px 0px;
+    max-width: 1060px;
 }
 
 .demo-container, .login-container, .account-container {
