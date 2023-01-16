@@ -3,7 +3,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Account Info</title>
+    <title>Informacje o koncie</title>
     <link rel="stylesheet" type="text/css" th:href="@{/styles.css}">
 </head>
 <body>
@@ -11,11 +11,19 @@
 <th:block th:include="/_header"></th:block>
 <th:block th:include="/_menu"></th:block>
 
-<div class="page-title">Account Info</div>
+<div class="page-title">Informacje o koncie</div>
 <div class="account-container">
     <ul>
-        <li>User Name:<span th:utext="${userDetails.getUserName()}"></span></li>
-        <li>Is Active:<span th:utext="${userDetails.isActive()}"></span></li>
+        <li>Nazwa użytkownika:<span th:utext="${userDetails.getUserName()}"></span></li>
+        <li>Status konta:<span th:utext="${userDetails.isActive()}"></span></li>
+    </ul>
+</div>
+<div class="customer-data-container" >
+    <ul>
+        <li>Nazwa uzytkownika: <span th:utext="${accountInfo.getUserName()}"></span></li>
+        <li>Email: <span th:utext="${accountInfo.getEmail()}"></span></li>
+        <li>Numer telefonu: <span th:utext="${accountInfo.getPhone()}"></span></li>
+        <li>Adres: <span th:utext="${accountInfo.getAddress())}"></span></li>
     </ul>
 </div>
 
