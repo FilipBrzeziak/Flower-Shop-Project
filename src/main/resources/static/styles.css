@@ -8,7 +8,7 @@ h3 {
 body {
     min-width: 360px;
     margin: 0px auto;
-    background: #F8F8F8;
+    background: white;
     padding:0px 5px;
     text-align:center;
 }
@@ -16,7 +16,7 @@ body {
 .page-title  {
     font-size:120%;
     text-align: left;
-    margin:10px 0px;
+    margin:10px 5px;
 }
 .header-container {
     text-align: left;
@@ -41,6 +41,9 @@ body {
 
 }
 
+a:hover{
+    outline: 0;
+}
 
 .menu-container {
     text-align: left;
@@ -48,7 +51,8 @@ body {
 }
 .menu-container a {
     margin: 5px 5px 5px 10px;
-    color: #004d99;
+    color: #6f777d;
+    font-size: 150%;
     font-weight: bold;
     text-decoration: none;
 }
@@ -62,6 +66,12 @@ body {
     margin:10px 10px 10px 0px;
     padding: 5px;
 }
+
+.menu-container a:hover{
+    color: #53595e;
+    border-bottom: 2px solid #6f777d;
+}
+
 
 .img{
     width: 25px;
@@ -108,6 +118,7 @@ ul {
     list-style-type: none;
     padding-left: 5px;
     margin:5px;
+
 }
 
 

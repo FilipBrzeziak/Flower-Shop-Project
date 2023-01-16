@@ -5,19 +5,15 @@
      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
     <nav id="site-nav" class="greedy-nav">
         <a th:href="@{/}">O nas</a>
-        |
         <a th:href="@{/productList}">
             Oferta
         </a>
-        |
         <a th:href="@{/shoppingCart}">
             Koszyk
         </a>
-        |
         <a th:href="@{/shoppingCart}">
             Edytuj dane
         </a>
-        |
         <th:block sec:authorize="hasAnyRole('ROLE_ADMIN')">
             <a th:href="@{/shop/orderList}">
                 Historia wszystkich zamówień
@@ -28,17 +24,15 @@
             <a th:href="@{/shop/userOrderList}">
                 Historia zamówień
             </a>
-            |
         </th:block>
         <th:block sec:authorize="hasRole('ROLE_ADMIN')">
             <a th:href="@{/shop/product}">
                 Dodaj produkt
             </a>
-            |
             <a th:href="@{/shoppingCart}">
                 Kreator bukietów
             </a>
-            |
+
         </th:block>
     </nav>
 </div>
