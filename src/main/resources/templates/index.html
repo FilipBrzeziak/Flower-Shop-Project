@@ -3,29 +3,28 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Niezapominajka</title>
+    <title>Kwiaciarnia | Niezapominajka</title>
     <link rel="stylesheet" type="text/css" th:href="@{/styles.css}"/>
-    <link rel="icon" type="image/x-icon" href="/images/favicon.png">
+    <link rel="shortcut icon" type="image/png" th:href="@{site-logo.png}">
 </head>
 <body>
 <th:block th:include="/_header"></th:block>
 <th:block th:include="/_menu"></th:block>
+<div class="header-index-container">
+    <div class="about-container">
+        <div class="col-2">
+            <h1>Kwiaciarnia "Niezapominajka"</h1>
+            <p><br>Niezapominajka to kwiaciarnia online pomocna w sytuacjach, kiedy nie możesz wręczyć kwiatów
+                osobiście, albo też chcesz komuś sprawić miłą niespodziankę. </p>
+            <a th:href="@{/productList}">
+                <button class="btn-oferta">Sprawdź ofertę! &#8594;</button>
+            </a>
+        </div>
+        <div class="col-2">
+            <img src="../static/images/niezapominajka.png" th:src="@{/images/niezapominajka.png}">
+        </div>
 
-<div class="page-title">Kwiaciarnia Niezapominajka</div>
-<div class="demo-container">
-    <h2>O nas</h2>
-    <h3>W naszej ofercie można znaleźć: </h3>
-    <ul>
-        <li>Przeglądanie szerokiej gamy produktów:
-            <ul>
-                <li>kwiatów,</li>
-                <li>ozdób,</li>
-                <li>dodatków.</li>
-            </ul>
-        </li>
-        <li>Kreator bukietów</li>
-    </ul>
+    </div>
 </div>
-
 </body>
 </html>
