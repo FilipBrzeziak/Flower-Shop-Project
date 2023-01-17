@@ -63,17 +63,28 @@ public class UserController {
     public String accountInfo(Model model) {
         UserDetails simpleDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         Account account = accountDAO.findAccount(simpleDetails.getUsername());
-        AccountInfo userDetails = new AccountInfo(account.getUserName(), account.isActive(), account.getEmail(),
+        AccountInfo accountInfo = new AccountInfo(account.getUserName(), account.isActive(), account.getEmail(),
                 account.getPhone(), account.getFirstName(), account.getLastName(), account.getUserAddress(),
                 account.getUserCity());
-        model.addAttribute("userDetails", userDetails);
+        model.addAttribute("accountInfo", accountInfo);
         return "accountInfo";
     }
 
-    @RequestMapping(value = { "/shop/editAccountDetails" }, method = RequestMethod.PUT)
-    public void editAccountDetails(@ModelAttribute("accountInfo") AccountInfo accountInfo ) {
+    @RequestMapping(value = { "/shop/editAccountDetails" }, method = {RequestMethod.GET})
+    public String editAccountDetails(Model model) {
+        UserDetails simpleDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        Account account = accountDAO.findAccount(simpleDetails.getUsername());
+        AccountInfo accountInfo = new AccountInfo(account.getUserName(), account.isActive(), account.getEmail(),
+                account.getPhone(), account.getFirstName(), account.getLastName(), account.getUserAddress(),
+                account.getUserCity());
+        model.addAttribute("accountInfo", accountInfo);
+        return "editAccountDetails";
+    }
+    @RequestMapping(value = { "/shop/editAccountDetails" }, method = {RequestMethod.POST})
+    public String editAccountDetails(Model model, @ModelAttribute("accountInfo") AccountInfo accountInfo ) {
         UserDetails simpleDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         accountDAO.updateAccount(simpleDetails.getUsername(),accountInfo.getEmail(),accountInfo.getPhoneNumber(),accountInfo.getAddress(),accountInfo.getName(),accountInfo.getLastName(),accountInfo.getCity());
+        return "accountInfo";
     }
 
     @RequestMapping(value = { "/shop/userOrderList" }, method = RequestMethod.GET)

@@ -23,6 +23,12 @@ public class Product implements Serializable {
     @Column(name = "Code", length = 20, nullable = false)
     private String code;
 
+    @Column(name = "Colour", length = 20, nullable = false)
+    private String colour;
+
+    @Column(name = "Category", length = 20, nullable = false)
+    private String category;
+
     @Column(name = "Name", length = 255, nullable = false)
     private String name;
 
@@ -38,6 +44,22 @@ public class Product implements Serializable {
     private Date createDate;
 
     public Product() {
+    }
+
+    public String getColour() {
+        return colour;
+    }
+
+    public void setColour(String colour) {
+        this.colour = colour;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
     }
 
     public String getCode() {

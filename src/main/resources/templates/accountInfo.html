@@ -15,14 +15,14 @@
 
 <div class="account-container" >
     <ul>
-        <li>Nazwa użytkownika:<span th:utext="${userDetails.getUserName()}"></span></li>
-        <li>Czy konto aktywne:<span th:utext="${userDetails.isActive()}"></span></li>
-        <li>Email: <span th:utext="${userDetails.getEmail()}"></span></li>
-        <li>Numer telefonu: <span th:utext="${userDetails.getPhoneNumber()}"></span></li>
-        <li>Adres: <span th:utext="${userDetails.getAddress()}"></span></li>
-        <li>Imię: <span th:utext="${userDetails.getName()}"></span></li>
-        <li>Nazwisko: <span th:utext="${userDetails.getLastName()}"></span></li>
-        <li>Miasto: <span th:utext="${userDetails.getCity()}"></span></li>
+        <li>Nazwa użytkownika:<span th:utext="${accountInfo.getUserName()}"></span></li>
+        <li>Czy konto aktywne:<span th:utext="${accountInfo.isActive()}"></span></li>
+        <li>Email: <span th:utext="${accountInfo.getEmail()}"></span></li>
+        <li>Numer telefonu: <span th:utext="${accountInfo.getPhoneNumber()}"></span></li>
+        <li>Adres: <span th:utext="${accountInfo.getAddress()}"></span></li>
+        <li>Imię: <span th:utext="${accountInfo.getName()}"></span></li>
+        <li>Nazwisko: <span th:utext="${accountInfo.getLastName()}"></span></li>
+        <li>Miasto: <span th:utext="${accountInfo.getCity()}"></span></li>
 
     </ul>
     <a th:href="@{/shop/editAccountDetails}" target="_parent"><button type="button">Zmień</button></a>

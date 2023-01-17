@@ -16,6 +16,8 @@ alter table ACCOUNTS
 create table PRODUCTS
 (
     CODE        varchar(20)  not null,
+    COLOUR        varchar(20)  not null,
+    CATEGORY        varchar(20)  not null,
     IMAGE       blob,
     NAME        varchar(255) not null,
     PRICE       double       not null,
@@ -82,28 +84,38 @@ values ('admin',
         'Wiejska 1/2',
         '58-100 Warszawa',
         'ROLE_ADMIN');
-insert into products (CODE, NAME, PRICE, CREATE_DATE)
+insert into products (CODE,COLOUR,CATEGORY, NAME, PRICE, CREATE_DATE)
 values ('S001',
-        'Core Java',
+        'niebieski',
+        'kwiat',
+        'Niezapominajka',
         100,
         sysdate);
-insert into products (CODE, NAME, PRICE, CREATE_DATE)
+insert into products (CODE,COLOUR,CATEGORY, NAME, PRICE, CREATE_DATE)
 values ('S002',
-        'Spring for Beginners',
+        'pomarańczowy',
+        'kwiat',
+        'Krokus',
         50,
         sysdate);
-insert into products (CODE, NAME, PRICE, CREATE_DATE)
+insert into products (CODE,COLOUR,CATEGORY, NAME, PRICE, CREATE_DATE)
 values ('S003',
-        'Swift for Beginners',
+        'zielony',
+        'dodatek',
+        'Wstążka',
         120,
         sysdate);
-insert into products (CODE, NAME, PRICE, CREATE_DATE)
+insert into products (CODE,COLOUR,CATEGORY, NAME, PRICE, CREATE_DATE)
 values ('S004',
-        'Oracle XML Parser',
+        'czerwony',
+        'kwiat',
+        'Róża',
         120,
         sysdate);
-insert into products (CODE, NAME, PRICE, CREATE_DATE)
+insert into products (CODE,COLOUR,CATEGORY, NAME, PRICE, CREATE_DATE)
 values ('S005',
-        'CSharp Tutorial for Beginers',
+        'biały',
+        'dodatek',
+        'Papier',
         110,
         sysdate);

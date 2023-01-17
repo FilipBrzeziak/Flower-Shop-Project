@@ -22,6 +22,17 @@ public class AccountInfo {
         this.city = city;
     }
 
+    public AccountInfo() {
+        this.userName = "default";
+        this.isActive = false;
+        this.email = "default";
+        this.phoneNumber = "default";
+        this.name = "default";
+        this.lastName = "default";
+        this.address = "default";
+        this.city = "default";
+    }
+
     public String getEmail() {
         return email;
     }

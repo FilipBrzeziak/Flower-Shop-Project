@@ -5,6 +5,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 public class ProductForm {
     private String code;
+    private String colour;
+    private String category;
     private String name;
     private double price;
 
@@ -20,6 +22,25 @@ public class ProductForm {
         this.code = product.getCode();
         this.name = product.getName();
         this.price = product.getPrice();
+        this.colour = product.getColour();
+
+        this.category = product.getCategory();
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+    public String getColour() {
+        return colour;
+    }
+
+    public void setColour(String colour) {
+        this.colour = colour;
     }
 
     public String getCode() {

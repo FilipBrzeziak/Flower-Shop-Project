@@ -12,28 +12,34 @@
 <th:block th:include="/_menu"></th:block>
 
 <div class="page-title">Informacje o koncie</div>
-<form method="PUT" th:object="${accountInfo}" th:action="@{/shop/editAccountDetails}">
-
+<form th:object="${accountInfo}" th:action="@{/shop/editAccountDetails}"
+      method="POST" enctype="multipart/form-data">
     <div class="account-container">
         <ul>
             <li>Nowy email:
-                <td><input th:field=""/></td>
+                <td><input th:field="*{email}"/></td>
             </li>
             <li>Nowy numer telefonu:
-                <td><input th:field=""/></td>
+                <td><input th:field="*{phoneNumber}"/></td>
                 </span></li>
             <li>Nowy adres:
-                <td><input th:field=""/></td>
+                <td><input th:field="*{address}"/></td>
                 </span></li>
             <li>Nowe imię:
-                <td><input th:field=""/></td>
+                <td><input th:field="*{name}"/></td>
             </li>
             <li>Nowe nazwisko:
-                <td><input th:field=""/></td>
+                <td><input th:field="*{lastName}"/></td>
                 </span></li>
             <li>Nowe miasto:
-                <td><input th:field=""/></td>
+                <input th:field="*{city}"/></td>
                 </span></li>
+
+            <tr>
+                <td>&nbsp;</td>
+                <td><input type="submit" value="Zatwierdź" /> <input type="reset"
+                                                                     value="Wyczyść" /></td>
+            </tr>
 
         </ul>
     </div>
