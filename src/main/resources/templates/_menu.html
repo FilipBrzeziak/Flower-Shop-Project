@@ -3,7 +3,7 @@
 <div class="menu-container"
      xmlns:th="http://www.thymeleaf.org"
      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
-    <nav id="site-nav" class="greedy-nav">
+    <nav id="site-nav" class="navbar">
         <a th:href="@{/}">O nas</a>
         <a th:href="@{/productList}">
             Oferta
@@ -11,16 +11,12 @@
         <a th:href="@{/shoppingCart}">
             Koszyk
         </a>
-        <a th:href="@{/shoppingCart}">
-            Edytuj dane
-        </a>
         <th:block sec:authorize="hasAnyRole('ROLE_ADMIN')">
             <a th:href="@{/shop/orderList}">
                 Historia wszystkich zamówień
             </a>
-            |
         </th:block>
-        <th:block sec:authorize="hasAnyRole('ROLE_CLIENT')">
+        <th:block sec:authorize="hasAnyRole('ROLE_ADMIN')">
             <a th:href="@{/shop/userOrderList}">
                 Historia zamówień
             </a>

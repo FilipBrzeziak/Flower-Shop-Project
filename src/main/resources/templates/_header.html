@@ -1,27 +1,34 @@
 <html lang="pl">
 <meta charset="utf-8">
 <div class="header-container"
-     xmlns:th="http://www.thymeleaf.org"
-     xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+xmlns:th="http://www.thymeleaf.org"
+xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 
-    <div class="header-main-display">
-        <a class="site-logo" href="/"><img src="/images/site-logo.png" alt="Niezapominajka" width=”42″ height=”42″ ></a>
-        <div class="site-name">Niezapominajka</div>
 
+<div class="header-main-display">
+    <div class="logo">
+        <img src="../static/images/site-logo.png" th:src="@{/images/site-logo.png}">
     </div>
+    <div class="site-name">Niezapominajka</div>
+
+</div>
 
 
-    <div class="header-bar">
-        <th:block sec:authorize="isAuthenticated()">
-            Witaj
-            <a th:href="@{/shop/accountInfo}" th:utext="${#request.userPrincipal.name}">..</a>
-            &nbsp;|&nbsp;
+<div class="header-bar">
+    <th:block sec:authorize="isAuthenticated()">
+        Witaj
+        <a th:href="@{/shop/accountInfo}" th:utext="${#request.userPrincipal.name}">..</a>
+        &nbsp;|&nbsp;
             <a th:href="@{/shop/logout}">Wyloguj się</a>
-        </th:block>
 
-        <th:block sec:authorize="!isAuthenticated()">
+    </th:block>
+
+    <th:block sec:authorize="!isAuthenticated()">
+        <div class="sign-in-logo">
             <a th:href="@{/shop/login}">Zaloguj się</a>
-        </th:block>
-    </div>
+        </div>
+
+    </th:block>
+</div>
 
 </div>

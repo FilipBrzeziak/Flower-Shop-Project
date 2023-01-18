@@ -25,7 +25,8 @@
         <li>Miasto: <span th:utext="${accountInfo.getCity()}"></span></li>
 
     </ul>
-    <a th:href="@{/shop/editAccountDetails}" target="_parent"><button type="button">Zmień</button></a>
-</div>
+    <a th:href="@{/editAccountDetails}">
+        <button class="btn-zmiana">Edytuj</button>
+    </a></div>
 </body>
 </html>
