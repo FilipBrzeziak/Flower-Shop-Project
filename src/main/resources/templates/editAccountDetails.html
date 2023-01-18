@@ -17,7 +17,7 @@
     <div class="account-container">
         <ul>
             <li>Nowy email:
-                <td><input type="email" th:field="*{email}"/></td>
+                <td><input th:field="*{email}"/></td>
             </li>
             <li>Nowy numer telefonu:
                 <td><input th:field="*{phoneNumber}"/></td>
@@ -37,9 +37,8 @@
 
             <tr>
                 <td>&nbsp;</td>
-                <td><button type="submit" class="btn-zmiana" >Zatwierdź </button>
-                    <button type="reset" class="btn-zmiana">Wyczyść</button>
-
+                <td><input type="submit" value="Zatwierdź" /> <input type="reset"
+                                                                     value="Wyczyść" /></td>
             </tr>
 
         </ul>

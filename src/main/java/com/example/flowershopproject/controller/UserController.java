@@ -7,10 +7,12 @@ import com.example.flowershopproject.entity.Account;
 import com.example.flowershopproject.entity.Product;
 import com.example.flowershopproject.form.ProductForm;
 import com.example.flowershopproject.model.AccountInfo;
+import com.example.flowershopproject.model.CartInfo;
 import com.example.flowershopproject.model.OrderDetailInfo;
 import com.example.flowershopproject.model.OrderInfo;
 import com.example.flowershopproject.pagination.PaginationResult;
 import com.example.flowershopproject.service.UserDetailsServiceImpl;
+import com.example.flowershopproject.utils.Utils;
 import com.example.flowershopproject.validator.ProductFormValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -23,6 +25,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @Controller
@@ -154,6 +157,18 @@ public class UserController {
             return "product";
         }
         return "redirect:/productList";
+    }
+
+
+    @RequestMapping(value = {"/shop/bouquetCreator"}, method = RequestMethod.GET)
+    public String getbouquetCreator(HttpServletRequest request, Model model) {
+        return "bouquetCreator";
+    }
+
+    @RequestMapping(value = {"/shop/bouquetCreator"}, method = RequestMethod.POST)
+    public String createbouquetCreator(HttpServletRequest request, Model model) {
+       return "redirect:/shoppingCart";
+
     }
 
     @RequestMapping(value = { "/shop/order" }, method = RequestMethod.GET)

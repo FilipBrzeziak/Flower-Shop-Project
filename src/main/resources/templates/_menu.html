@@ -16,7 +16,7 @@
                 Historia wszystkich zamówień
             </a>
         </th:block>
-        <th:block sec:authorize="hasAnyRole('ROLE_ADMIN')">
+        <th:block sec:authorize="hasAnyRole('ROLE_CLIENT')">
             <a th:href="@{/shop/userOrderList}">
                 Historia zamówień
             </a>
@@ -25,9 +25,12 @@
             <a th:href="@{/shop/product}">
                 Dodaj produkt
             </a>
-            <a th:href="@{/shoppingCart}">
+        </th:block>
+        <th:block sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_CLIENT')">
+            <a th:href="@{/shop/bouquetCreator}">
                 Kreator bukietów
             </a>
+        </th:block>
 
         </th:block>
     </nav>
