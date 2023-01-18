@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="pl">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+<head>
+    <meta charset="UTF-8">
+    <title>Kreator bukietów</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/styles.css}">
+</head>
+<body>
+<th:block th:include="/_header"></th:block>
+<th:block th:include="/_menu"></th:block>
+
+<div class="page-title">Kreator bukietów</div>
+<div class="creator-container">
+    <form id="creator-form" name="creator_form" th:action method="post">
+        <div class="opt-delivery">
+            <h2>Wybierz datę dostawy</h2>
+
+
+        </div>
+        <div class="opt-quantityy">
+            <h2>Wybierz ilość</h2>
+
+
+        </div>
+        <div class="opt-color">
+            <h2>Wybierz kolor</h2>
+
+
+        </div>
+        <div class="opt-accesories">
+            <h2>Wybierz dodatki</h2>
+
+
+        </div>
+        <div id="creator-summary" class="creator-summary">
+            <div class="line">
+                <span class="label"> Wartość bukietu: </span>
+                <span id="bouqet-prize" class="value">0,00zł</span>
+            </div>
+            <div class="line">
+                <span class="label"> Koszt dostawy: </span>
+                <span id="delivery-cost" class="value">0,00zł</span>
+            </div>
+            <div class="line">
+                <span class="label b"> Do zapłaty: </span>
+                <span id="bouqet-total" class="value total">0,00zł</span>
+            </div>
+        </div>
+
+        <div id="add-to-cart" class="add-to-cart">
+            <button class="btn-dodaj" type="submit"><i class='fas fa-cart-plus'></i> Do koszyka</button>
+
+        </div>
+
+    </form>
+</div>
+
+
+</body>
+</html>

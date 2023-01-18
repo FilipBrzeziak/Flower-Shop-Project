@@ -17,15 +17,15 @@
     <ul>
         <li>Nazwa użytkownika:<span th:utext="${accountInfo.getUserName()}"></span></li>
         <li>Czy konto aktywne:<span th:utext="${accountInfo.isActive()}"></span></li>
+        <li>Imię: <span th:utext="${accountInfo.getName()}"></span></li>
+        <li>Nazwisko: <span th:utext="${accountInfo.getLastName()}"></span></li>
         <li>Email: <span th:utext="${accountInfo.getEmail()}"></span></li>
         <li>Numer telefonu: <span th:utext="${accountInfo.getPhoneNumber()}"></span></li>
         <li>Adres: <span th:utext="${accountInfo.getAddress()}"></span></li>
-        <li>Imię: <span th:utext="${accountInfo.getName()}"></span></li>
-        <li>Nazwisko: <span th:utext="${accountInfo.getLastName()}"></span></li>
         <li>Miasto: <span th:utext="${accountInfo.getCity()}"></span></li>
 
     </ul>
-    <a th:href="@{/editAccountDetails}">
+    <a th:href="@{/shop/editAccountDetails}" target="_parent">
         <button class="btn-zmiana">Edytuj</button>
     </a></div>
 </body>
