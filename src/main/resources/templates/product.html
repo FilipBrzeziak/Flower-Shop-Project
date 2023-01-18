@@ -5,6 +5,68 @@
     <meta charset="UTF-8">
     <title>Product</title>
     <link rel="stylesheet" type="text/css" th:href="@{/styles.css}">
+    <style>
+
+        /* Formularz produktu */
+        form {
+            font-size: x-large;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color:  #f2f2f2;
+            border-radius: 10px;
+        }
+
+        form td {
+            padding: 10px 30px;
+        }
+
+        /* Wiadomość błędu */
+        .error-message {
+            color: red;
+            font-size: 0.8em;
+            padding: 0.5em;
+        }
+
+        /* Obraz produktu */
+        img {border: 1px solid #ccc;
+            padding: 0.5em;
+        }
+
+        /* Przyciski */
+        input[type="submit"],
+        input[type="reset"] {
+            background: #85A4E4;
+            color: white;
+            border-radius: 30px;
+            border-color: #85A4E4;
+            padding: 0.5em 1em;
+            border: none;
+            cursor: pointer;
+        }
+
+        input[type="submit"]:hover,
+        input[type="reset"]:hover {
+            background-color: #85A4E4;
+            border-radius: 30px;
+            border-color: #85A4E4;
+        }
+
+        /* Ustawienia tabeli */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 1em;
+        }
+
+        table td:first-child {
+            width: 20%;
+            font-weight: bold;
+            text-align: right;
+        }
+
+
+    </style>
 </head>
 <body>
 
@@ -19,7 +81,7 @@
        method="POST" enctype="multipart/form-data">
     <table style="text-align:left;">
         <tr>
-            <td>Code *</td>
+            <td>Code </td>
             <td style="color:red;">
                 <input th:field="*{newProduct}" type="hidden" />
                 <input th:if="${productForm.newProduct}" type="text"
@@ -34,28 +96,28 @@
             </td>
         </tr>
         <tr>
-            <td>Colour *</td>
+            <td>Colour </td>
             <td><input th:field="*{colour}"  /></td>
             <td>
                 <span class="error-message" th:if="${#fields.hasErrors('colour')}" th:errors="*{colour}">..</span>
             </td>
         </tr>
         <tr>
-            <td>Category *</td>
+            <td>Category </td>
             <td><input th:field="*{category}"  /></td>
             <td>
                 <span class="error-message" th:if="${#fields.hasErrors('category')}" th:errors="*{category}">..</span>
             </td>
         </tr>
         <tr>
-            <td>Name *</td>
+            <td>Name </td>
             <td><input th:field="*{name}"  /></td>
             <td>
                 <span class="error-message" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">..</span>
             </td>
         </tr>
         <tr>
-            <td>Price *</td>
+            <td>Price </td>
             <td><input th:field="*{price}"  /></td>
             <td>
                 <span class="error-message" th:if="${#fields.hasErrors('price')}" th:errors="*{price}">..</span>

@@ -5,6 +5,43 @@
     <meta charset="UTF-8">
     <title>Historia zamówień</title>
     <link rel="stylesheet" type="text/css" th:href="@{/styles.css}">
+    <style>
+
+        .customer-info-container {
+            font-size: large;
+            padding: 20px;
+            margin-bottom: 40px;
+        }
+
+        .customer-info-container ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .customer-info-container li {
+            margin-bottom: 10px;
+        }
+
+        .total {
+            font-weight: bold;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        td, th {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+        th {
+            background-color: #dddddd;
+        }
+
+    </style>
 </head>
 <body>
 <th:block th:include="/_header"></th:block>

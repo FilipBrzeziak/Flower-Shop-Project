@@ -8,9 +8,10 @@
     <link rel="stylesheet" type="text/css" th:href="@{/styles.css}">
     <style>
         /* Ogólne style */
-        
+
         form {
-            max-width: 600px;
+            font-size: x-large;
+            max-width: 800px;
             margin: 0 auto;
             padding: 20px;
             background-color: #f2f2f2;
@@ -45,6 +46,9 @@
             border-color: #85A4E4;
             cursor: pointer;
         }
+        .btn-create:hover {
+            background-color: #005580;
+        }
 
         /* Style dla pola tekstowego */
         input[type='number'] {
@@ -56,10 +60,7 @@
             border-radius: 4px;
             box-sizing: border-box;
         }
-        #flower-image {
-            width: 300px;
-            border-radius: 10px;
-        }
+
         .add-on-images-c, .add-on-images-d, .add-on-images-f{
             width: 300px;
             height: 300px;
@@ -73,7 +74,7 @@
 <br>
 <form>
     <label for="flower-select">Wybierz kwiaty:</label>
-    <select id="flower-select" name="flower-select" onchange="changeFlowerImage()">
+    <select id="flower-select" name="flower-select" onchange="changeFlowerImage()" required>
         <option value="none">Wybrany</option>
         <option value="rose">Róża</option>
         <option value="tulip">Tulipan</option>
@@ -90,7 +91,7 @@
     <br>
 
     <label for="color-select">Wybierz kolor:</label>
-    <select id="color-select" name="color-select">
+    <select id="color-select" name="color-select" required>
         <option value="red">Czerwony</option>
         <option value="pink">Różowy</option>
         <option value="white">Biały</option>
@@ -101,12 +102,12 @@
     <br>
 
     <label for="quantity">Ilość:</label>
-    <input type="number" id="quantity" name="quantity" min="1" max="50">
+    <input type="number" id="quantity" name="quantity" min="1" max="50" required>
 
     <br>
 
     <label for="dodatki-select">Dodatki:</label>
-    <select id="dodatki-select" name="dodatki-select" onchange="changeDodatekImage()">
+    <select id="dodatki-select" name="dodatki-select" onchange="changeDodatekImage()" required>
         <option value="none">Brak</option>
         <option value="ribbon">Wstążka</option>
         <option value="bow">Kokarda</option>
@@ -121,7 +122,7 @@
     <img id="heart.jpg" src="../static/images/heart.jpg" th:src="@{/images/heart.jpg}" alt="Heart" class="add-on-images-d" style="display:none;">
     <br>
     <label for="compose-select">Wybierz jak skomponować:</label>
-    <select id="compose-select" name="compose-select" onchange="changeComposeImage()">
+    <select id="compose-select" name="compose-select" onchange="changeComposeImage()" required>
         <option value="none">Wybrany</option>
         <option value="bunch">Wiązanka</option>
         <option value="tied">Bukiet wiązany</option>
@@ -139,7 +140,7 @@
 
     <br><br>
 
-    <button type="submit">Stwórz bukiet</button>
+    <button class="btn-create" type="submit">Stwórz bukiet</button>
 </form>
 <script>
     function changeFlowerImage() {
