@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html lang="pl">
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head>
     <meta charset="UTF-8">
     <title>Kreator Bukietów</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/styles.css}">
     <style>
         /* Ogólne style */
-        body {
-            font-family: Arial, sans-serif;
-        }
+        
         form {
             max-width: 600px;
             margin: 0 auto;
@@ -60,11 +60,17 @@
             width: 300px;
             border-radius: 10px;
         }
+        .add-on-images-c, .add-on-images-d, .add-on-images-f{
+            width: 300px;
+            height: 300px;
+        }
     </style>
 </head>
 <body>
 <th:block th:include="/_header"></th:block>
 <th:block th:include="/_menu"></th:block>
+<div class="page-title">Kreator Bukietów</div>
+<br>
 <form>
     <label for="flower-select">Wybierz kwiaty:</label>
     <select id="flower-select" name="flower-select" onchange="changeFlowerImage()">
@@ -76,11 +82,11 @@
         <option value="sunflower">Słonecznik</option>
     </select>
     <br>
-    <img id="rose.jpg" src="rose.jpg" alt="Rose" class="add-on-images-f" style="display:none;">
-    <img id="tulip.jpg" src="tulip.jpg" alt="Tulip" class="add-on-images-f" style="display:none;">
-    <img id="sunflower.jpg" src="sunflower.jpg" alt="Sunflower" class="add-on-images-f" style="display:none;">
-    <img id="daisy.jpg" src="daisy.jpg" alt="Daisy" class="add-on-images-f" style="display:none;">
-    <img id="lily.jpg" src="lily.jpg" alt="Lily" class="add-on-images-f" style="display:none;">
+    <img id="rose.jpg" src="../static/images/rose.jpg" th:src="@{/images/rose.jpg}" alt="Rose" class="add-on-images-f" style="display:none;">
+    <img id="tulip.jpg" src="../static/images/tulip.jpg" th:src="@{/images/tulip.jpg}" alt="Tulip" class="add-on-images-f" style="display:none;">
+    <img id="sunflower.jpg" src="../static/images/sunflower.jpg" th:src="@{/images/sunflower.jpg}" alt="Sunflower" class="add-on-images-f" style="display:none;">
+    <img id="daisy.jpg" src="../static/images/daisy.jpg" th:src="@{/images/daisy.jpg}" alt="Daisy" class="add-on-images-f" style="display:none;">
+    <img id="lily.jpg" src="../static/images/lily.jpg" th:src="@{/images/lily.jpg}" alt="Lily" class="add-on-images-f" style="display:none;">
     <br>
 
     <label for="color-select">Wybierz kolor:</label>
@@ -109,11 +115,11 @@
     </select>
 
     <br>
-    <img id="ribbon.jpg" src="ribbon.jpg" alt="Ribbon" class="add-on-images-d" style="display:none;">
-    <img id="bow.jpg" src="bow.jpg" alt="Bow" class="add-on-images-d" style="display:none;">
-    <img id="card.jpg" src="card.jpg" alt="Card" class="add-on-images-d" style="display:none;">
-    <img id="heart.jpg" src="heart.jpg" alt="Heart" class="add-on-images-d" style="display:none;">
-
+    <img id="ribbon.jpg" src="../static/images/ribbon.jpg" th:src="@{/images/ribbon.jpg}" alt="Ribbon" class="add-on-images-d" style="display:none;">
+    <img id="bow.jpg" src="../static/images/bow.jpg" th:src="@{/images/bow.jpg}" alt="Bow" class="add-on-images-d" style="display:none;">
+    <img id="card.jpg" src="../static/images/card.jpg" th:src="@{/images/card.jpg}" alt="Card" class="add-on-images-d" style="display:none;">
+    <img id="heart.jpg" src="../static/images/heart.jpg" th:src="@{/images/heart.jpg}" alt="Heart" class="add-on-images-d" style="display:none;">
+    <br>
     <label for="compose-select">Wybierz jak skomponować:</label>
     <select id="compose-select" name="compose-select" onchange="changeComposeImage()">
         <option value="none">Wybrany</option>
@@ -124,11 +130,11 @@
         <option value="basket">Kosz</option>
     </select>
     <br>
-    <img id="bunch.jpg" src="bunch.jpg" alt="Bunch" class="add-on-images-c" style="display:none;">
-    <img id="tied.jpg" src="tied.jpg" alt="Tied" class="add-on-images-c" style="display:none;">
-    <img id="box.jpg" src="box.jpg" alt="Box" class="add-on-images-c" style="display:none;">
-    <img id="rim.jpg" src="rim.jpg" alt="Rim" class="add-on-images-c" style="display:none;">
-    <img id="basket.jpg" src="basket.jpg" alt="Basket" class="add-on-images-c" style="display:none;">
+    <img id="bunch.jpg" src="../static/images/bunch.jpg" th:src="@{/images/bunch.jpg}" alt="Bunch" class="add-on-images-c" style="display:none;">
+    <img id="tied.jpg" src="../static/images/tied.jpg" th:src="@{/images/tied.jpg}" alt="Tied" class="add-on-images-c" style="display:none;">
+    <img id="box.jpg" src="../static/images/box.jpg" th:src="@{/images/bow.jpg}" alt="Box" class="add-on-images-c" style="display:none;">
+    <img id="rim.jpg" src="../static/images/rim.jpg" th:src="@{/images/rim.jpg}" alt="Rim" class="add-on-images-c" style="display:none;">
+    <img id="basket.jpg" src="../static/images/basket.jpg" th:src="@{/images/basket.jpg}" alt="Basket" class="add-on-images-c" style="display:none;">
 
 
     <br><br>
