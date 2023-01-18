@@ -71,9 +71,10 @@
 <th:block th:include="/_menu"></th:block>
 <div class="page-title">Kreator Bukietów</div>
 <br>
-<form>
+<form th:action="@{/shop/bouquetCreator}"
+      method="POST" enctype="multipart/form-data">
     <label for="flower-select">Wybierz kwiaty:</label>
-    <select id="flower-select" name="flower-select" onchange="changeFlowerImage()">
+    <select id="flower-select" name="flowerSelect" onchange="changeFlowerImage()">
         <option value="none">Wybrany</option>
         <option value="rose">Róża</option>
         <option value="tulip">Tulipan</option>
@@ -89,15 +90,6 @@
     <img id="lily.jpg" src="../static/images/lily.jpg" th:src="@{/images/lily.jpg}" alt="Lily" class="add-on-images-f" style="display:none;">
     <br>
 
-    <label for="color-select">Wybierz kolor:</label>
-    <select id="color-select" name="color-select">
-        <option value="red">Czerwony</option>
-        <option value="pink">Różowy</option>
-        <option value="white">Biały</option>
-        <option value="yellow">Żółty</option>
-        <option value="orange">Pomarańczowy</option>
-    </select>
-
     <br>
 
     <label for="quantity">Ilość:</label>
@@ -106,7 +98,7 @@
     <br>
 
     <label for="dodatki-select">Dodatki:</label>
-    <select id="dodatki-select" name="dodatki-select" onchange="changeDodatekImage()">
+    <select id="dodatki-select" name="addition" onchange="changeDodatekImage()">
         <option value="none">Brak</option>
         <option value="ribbon">Wstążka</option>
         <option value="bow">Kokarda</option>
@@ -121,7 +113,7 @@
     <img id="heart.jpg" src="../static/images/heart.jpg" th:src="@{/images/heart.jpg}" alt="Heart" class="add-on-images-d" style="display:none;">
     <br>
     <label for="compose-select">Wybierz jak skomponować:</label>
-    <select id="compose-select" name="compose-select" onchange="changeComposeImage()">
+    <select id="compose-select" name="typeOfBouquet" onchange="changeComposeImage()">
         <option value="none">Wybrany</option>
         <option value="bunch">Wiązanka</option>
         <option value="tied">Bukiet wiązany</option>
