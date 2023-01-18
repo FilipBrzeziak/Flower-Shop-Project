@@ -166,7 +166,8 @@ public class UserController {
     }
 
     @RequestMapping(value = {"/shop/bouquetCreator"}, method = RequestMethod.POST)
-    public String createbouquetCreator(HttpServletRequest request, Model model) {
+    public String createbouquetCreator(String flowerSelect, Model model) {
+        System.out.print(flowerSelect);
        return "redirect:/shoppingCart";
 
     }
