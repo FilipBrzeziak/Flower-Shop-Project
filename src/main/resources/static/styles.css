@@ -255,10 +255,6 @@ table td {
 }
 
 /*account/edit page*/
-.account-container{
-
-}
-
 .login-container, .account-container {
     border: 1px solid #ccc;
     text-align: left;
@@ -274,4 +270,12 @@ table td {
     border-radius: 30px;
     border-color: #85A4E4;
     text-align: left;
+}
+
+/*bouquet creator*/
+.opt-flower, .opt-quantityy, .opt-color, .opt-accesories{
+    border: 1px solid #ccc;
+    text-align: left;
+    margin: 20px 0px;
+    padding: 20px 25px;
 }

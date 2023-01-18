@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="pl">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Kreator Bukietów</title>
+    <style>
+        /* Ogólne style */
+        body {
+            font-family: Arial, sans-serif;
+        }
+        form {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f2f2f2;
+            border-radius: 10px;
+        }
+
+        /* Style dla etykiet */
+        label {
+            font-weight: bold;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        /* Style dla list rozwijanych */
+        select {
+            width: 100%;
+            padding: 12px 20px;
+            margin-bottom: 20px;
+            display: inline-block;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        /* Style dla przycisków */
+        button[type='submit'] {
+            background: #85A4E4;
+            color: white;
+            padding: 8px 30px;
+            margin: 30px 0;
+            border-radius: 30px;
+            border-color: #85A4E4;
+            cursor: pointer;
+        }
+
+        /* Style dla pola tekstowego */
+        input[type='number'] {
+            width: 100%;
+            padding: 12px 20px;
+            margin-bottom: 20px;
+            display: inline-block;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        #flower-image {
+            width: 300px;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body>
+<th:block th:include="/_header"></th:block>
+<th:block th:include="/_menu"></th:block>
+<form>
+    <label for="flower-select">Wybierz kwiaty:</label>
+    <select id="flower-select" name="flower-select" onchange="changeFlowerImage()">
+        <option value="none">Wybrany</option>
+        <option value="rose">Róża</option>
+        <option value="tulip">Tulipan</option>
+        <option value="lily">Lilia</option>
+        <option value="daisy">Margaretka</option>
+        <option value="sunflower">Słonecznik</option>
+    </select>
+    <br>
+    <img id="rose.jpg" src="rose.jpg" alt="Rose" class="add-on-images-f" style="display:none;">
+    <img id="tulip.jpg" src="tulip.jpg" alt="Tulip" class="add-on-images-f" style="display:none;">
+    <img id="sunflower.jpg" src="sunflower.jpg" alt="Sunflower" class="add-on-images-f" style="display:none;">
+    <img id="daisy.jpg" src="daisy.jpg" alt="Daisy" class="add-on-images-f" style="display:none;">
+    <img id="lily.jpg" src="lily.jpg" alt="Lily" class="add-on-images-f" style="display:none;">
+    <br>
+
+    <label for="color-select">Wybierz kolor:</label>
+    <select id="color-select" name="color-select">
+        <option value="red">Czerwony</option>
+        <option value="pink">Różowy</option>
+        <option value="white">Biały</option>
+        <option value="yellow">Żółty</option>
+        <option value="orange">Pomarańczowy</option>
+    </select>
+
+    <br>
+
+    <label for="quantity">Ilość:</label>
+    <input type="number" id="quantity" name="quantity" min="1" max="50">
+
+    <br>
+
+    <label for="dodatki-select">Dodatki:</label>
+    <select id="dodatki-select" name="dodatki-select" onchange="changeDodatekImage()">
+        <option value="none">Brak</option>
+        <option value="ribbon">Wstążka</option>
+        <option value="bow">Kokarda</option>
+        <option value="card">Karteczka</option>
+        <option value="heart">Serce</option>
+    </select>
+
+    <br>
+    <img id="ribbon.jpg" src="ribbon.jpg" alt="Ribbon" class="add-on-images-d" style="display:none;">
+    <img id="bow.jpg" src="bow.jpg" alt="Bow" class="add-on-images-d" style="display:none;">
+    <img id="card.jpg" src="card.jpg" alt="Card" class="add-on-images-d" style="display:none;">
+    <img id="heart.jpg" src="heart.jpg" alt="Heart" class="add-on-images-d" style="display:none;">
+
+    <label for="compose-select">Wybierz jak skomponować:</label>
+    <select id="compose-select" name="compose-select" onchange="changeComposeImage()">
+        <option value="none">Wybrany</option>
+        <option value="bunch">Wiązanka</option>
+        <option value="tied">Bukiet wiązany</option>
+        <option value="box">Box</option>
+        <option value="rim">Wianek</option>
+        <option value="basket">Kosz</option>
+    </select>
+    <br>
+    <img id="bunch.jpg" src="bunch.jpg" alt="Bunch" class="add-on-images-c" style="display:none;">
+    <img id="tied.jpg" src="tied.jpg" alt="Tied" class="add-on-images-c" style="display:none;">
+    <img id="box.jpg" src="box.jpg" alt="Box" class="add-on-images-c" style="display:none;">
+    <img id="rim.jpg" src="rim.jpg" alt="Rim" class="add-on-images-c" style="display:none;">
+    <img id="basket.jpg" src="basket.jpg" alt="Basket" class="add-on-images-c" style="display:none;">
+
+
+    <br><br>
+
+    <button type="submit">Stwórz bukiet</button>
+</form>
+<script>
+    function changeFlowerImage() {
+        document.getElementById("rose.jpg").style.display = "none";
+        document.getElementById("tulip.jpg").style.display = "none";
+        document.getElementById("sunflower.jpg").style.display = "none";
+        document.getElementById("lily.jpg").style.display = "none";
+        document.getElementById("daisy.jpg").style.display = "none";
+        var flower = document.getElementById("flower-select").value + ".jpg";
+        document.getElementById(flower).style.display = "block";
+    }
+</script>
+<script>
+    function changeDodatekImage() {
+        document.getElementById("ribbon.jpg").style.display = "none";
+        document.getElementById("bow.jpg").style.display = "none";
+        document.getElementById("card.jpg").style.display = "none";
+        document.getElementById("heart.jpg").style.display = "none";
+        var dodatek = document.getElementById("dodatki-select").value + ".jpg";
+        document.getElementById(dodatek).style.display = "block";
+    }
+</script>
+<script>
+    function changeComposeImage() {
+        document.getElementById("bunch.jpg").style.display = "none";
+        document.getElementById("tied.jpg").style.display = "none";
+        document.getElementById("box.jpg").style.display = "none";
+        document.getElementById("rim.jpg").style.display = "none";
+        document.getElementById("basket.jpg").style.display = "none";
+        var compose = document.getElementById("compose-select").value + ".jpg";
+        document.getElementById(compose).style.display = "block";
+    }
+</script>
+</body>
+</html>
