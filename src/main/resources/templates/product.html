@@ -29,7 +29,7 @@
         }
 
         /* Obraz produktu */
-        img {border: 1px solid #ccc;
+        img {
             padding: 0.5em;
         }
 
@@ -81,7 +81,7 @@
        method="POST" enctype="multipart/form-data">
     <table style="text-align:left;">
         <tr>
-            <td>Code </td>
+            <td>Kod </td>
             <td style="color:red;">
                 <input th:field="*{newProduct}" type="hidden" />
                 <input th:if="${productForm.newProduct}" type="text"
@@ -96,49 +96,49 @@
             </td>
         </tr>
         <tr>
-            <td>Colour </td>
+            <td>Kolor </td>
             <td><input th:field="*{colour}"  /></td>
             <td>
                 <span class="error-message" th:if="${#fields.hasErrors('colour')}" th:errors="*{colour}">..</span>
             </td>
         </tr>
         <tr>
-            <td>Category </td>
+            <td>Kategoria </td>
             <td><input th:field="*{category}"  /></td>
             <td>
                 <span class="error-message" th:if="${#fields.hasErrors('category')}" th:errors="*{category}">..</span>
             </td>
         </tr>
         <tr>
-            <td>Name </td>
+            <td>Nazwa </td>
             <td><input th:field="*{name}"  /></td>
             <td>
                 <span class="error-message" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">..</span>
             </td>
         </tr>
         <tr>
-            <td>Price </td>
+            <td>Cena </td>
             <td><input th:field="*{price}"  /></td>
             <td>
                 <span class="error-message" th:if="${#fields.hasErrors('price')}" th:errors="*{price}">..</span>
             </td>
         </tr>
         <tr>
-            <td>Image</td>
+            <td>Obraz</td>
             <td>
                 <img th:src="@{|/productImage?code=${productForm.code}|}" width="100"/>
             </td>
             <td> </td>
         </tr>
         <tr>
-            <td>Upload Image</td>
+            <td>Załaduj obraz</td>
             <td><input type="file" th:field="*{fileData}" /></td>
             <td> </td>
         </tr>
         <tr>
             <td>&nbsp;</td>
             <td>
-                <input type="submit" value="Submit" />
+                <input type="submit" value="Zatwierdź" />
                 <input type="reset" value="Reset" />
             </td>
         </tr>

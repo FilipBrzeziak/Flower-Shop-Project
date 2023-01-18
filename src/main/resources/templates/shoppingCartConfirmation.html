@@ -5,6 +5,86 @@
     <meta charset="UTF-8">
     <title>Podsumowanie Koszyka</title>
     <link rel="stylesheet" type="text/css" th:href="@{/styles.css}">
+    <style>
+
+
+        /* customer info container styles */
+        .customer-info-container {
+            width: 50%;
+            margin: 0 auto;
+        }
+        .customer-info-container h3 {
+            margin-bottom: 10px;
+        }
+        .customer-info-container ul {
+            list-style: none;
+            padding: 0;
+        }
+        .customer-info-container ul li {
+            margin: 10px 0;
+        }
+        .customer-info-container .total {
+            color: crimson;
+            font-weight: bold;
+        }
+
+        /* login container styles */
+        .login-container {
+            width: 50%;
+            margin: 0 auto;
+        }
+        .login-container h3 {
+            margin-bottom: 10px;
+        }
+        .login-container table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .login-container table tr td {
+            padding: 10px;
+        }
+        .login-container .error-message {
+            color: #ff0000;
+        }
+
+        /* shopping cart confirmation styles */
+        .button-send-sc {
+            background-color: #85A4E4;
+            color: white;
+            padding: 8px 30px;
+            border: none;
+            cursor: pointer;
+            border-radius: 30px;
+            margin: 30px 0;
+        }
+        .product-preview-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .product-preview-container ul {
+            list-style: none;
+            padding: 0;
+            margin: 10px;
+            width: 20%;
+            text-align: center;
+        }
+        .product-preview-container ul li {
+            margin: 10px 0;
+        }
+        .product-preview-container .product-image {
+            width: 100%;
+        }
+        .product-preview-container .price {
+            color: crimson;
+            font-weight: bold;
+        }
+        .product-preview-container .subtotal {
+            color: crimson;
+            font-weight: bold;
+        }
+
+    </style>
 </head>
 <body>
 <th:block th:include="/_header"></th:block>

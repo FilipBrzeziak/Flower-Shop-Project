@@ -11,24 +11,26 @@
         <a th:href="@{/shoppingCart}">
             Koszyk
         </a>
-        <th:block sec:authorize="hasAnyRole('ROLE_ADMIN' )or hasAnyRole('ROLE_CLIENT')">
+        <th:block sec:authorize="hasAnyRole('ROLE_ADMIN' )">
             <a th:href="@{/shop/orderList}">
                 Historia wszystkich zamówień
             </a>
         </th:block>
-        <th:block sec:authorize="hasAnyRole('ROLE_ADMIN') or hasAnyRole('ROLE_CLIENT')">
+        <th:block sec:authorize="hasAnyRole('ROLE_CLIENT')">
             <a th:href="@{/shop/userOrderList}">
                 Historia zamówień
             </a>
         </th:block>
-        <th:block sec:authorize="hasRole('ROLE_ADMIN') or hasAnyRole('ROLE_CLIENT')">
+        <th:block sec:authorize="hasRole('ROLE_ADMIN') ">
             <a th:href="@{/shop/product}">
                 Dodaj produkt
             </a>
+
+        </th:block>
+        <th:block sec:authorize="hasAnyRole('ROLE_CLIENT')">
             <a th:href="@{/shop/bouquetCreator}">
                 Kreator bukietów
             </a>
-
         </th:block>
     </nav>
 </div>
