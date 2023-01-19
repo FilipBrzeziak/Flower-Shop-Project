@@ -5,6 +5,43 @@
     <meta charset="UTF-8">
     <title>Historia zamówień</title>
     <link rel="stylesheet" type="text/css" th:href="@{/styles.css}">
+    <style>
+
+        .customer-info-container {
+            font-size: large;
+            padding: 20px;
+            margin-bottom: 40px;
+        }
+
+        .customer-info-container ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .customer-info-container li {
+            margin-bottom: 10px;
+        }
+
+        .total {
+            font-weight: bold;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        td, th {
+            border: 1px solid #53595e;
+            text-align: left;
+            padding: 8px;
+        }
+
+        th {
+            background-color: #dddddd;
+        }
+
+    </style>
 </head>
 <body>
 <th:block th:include="/_header"></th:block>
@@ -23,7 +60,7 @@
     <h3>Podsumowanie zamówienia:</h3>
     <ul>
         <li>Razem:
-            <span class="total" th:utext="${#numbers.formatDecimal(orderInfo.amount,3,2,'COMMA')}">
+            <span class="total" th:utext="${#numbers.formatDecimal(orderInfo.amount,3,2,'COMMA').replaceAll('^0+(?!$)', '')}">
                </span>
         </li>
     </ul>
@@ -40,7 +77,7 @@
         <td th:utext="${orderDetailInfo.productCode}"></td>
         <td th:utext="${orderDetailInfo.productName}"></td>
         <td th:utext="${orderDetailInfo.quanity}"></td>
-        <td th:utext="${#numbers.formatDecimal(orderDetailInfo.price,3,2,'COMMA')}"></td>
+        <td th:utext="${#numbers.formatDecimal(orderDetailInfo.price,3,2,'COMMA').replaceAll('^0+(?!$)', '')}"></td>
     </tr>
 </table>
 

@@ -6,6 +6,50 @@
     <meta charset="UTF-8">
     <title>Oferta</title>
     <link rel="stylesheet" type="text/css" th:href="@{/styles.css}">
+    <style>
+
+        /* Sekcja z ofertą produktów */
+        .product-preview-container {
+            font-size: large;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+        }
+
+        .product-preview-container ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .product-preview-container li {
+            margin-bottom: 1em;
+        }
+
+        /* Obraz produktu */
+        .product-image {
+            max-width: 100%;
+        }
+
+        /* Przycisk Dodaj do koszyka */
+        .product-preview-container a {
+            background-color: #6f777d;
+            border-radius: 30px;
+            color: #fff;
+            padding: 0.5em 1em;
+            text-decoration: none;
+            cursor: pointer;
+            margin: 30px 0;
+            width: 100%;
+        }
+
+        .product-preview-container a:hover {
+            background-color:  #005580;
+        }
+
+
+    </style>
 </head>
 <body>
 <th:block th:include="/_header"></th:block>
@@ -22,15 +66,15 @@
         <li>Kategoria: <span th:utext="${prodInfo.category}"></span></li>
         <li>Nazwa: <span th:utext="${prodInfo.name}"></span></li>
         <li>Kolor: <span th:utext="${prodInfo.colour}"></span></li>
-        <li>Cena: <span th:utext="${#numbers.formatDecimal(prodInfo.price,3,2,'COMMA')}"></span></li>
+        <li>Cena: <span th:utext="${#numbers.formatDecimal(prodInfo.price,3,2,'COMMA').replaceAll('^0+(?!$)', '')}"></span></li>
         <li>
-            <a th:href="@{|/buyProduct?code=${prodInfo.code}|}">Dodaj do koszyka</a>
+            <a th:href="@{|/buyProduct?code=${prodInfo.code}|}">&#43; Dodaj do koszyka</a>
         </li>
         <!-- For Manager edit Product -->
         <th:block sec:authorize="hasAuthority('ROLE_ADMIN')">
             <li>
-                <a style="color:red;"
-                   th:href="@{|/shop/product?code=${prodInfo.code}|}">Edycja produktu</a>
+                <a style="color: crimson;"
+                   th:href="@{|/shop/product?code=${prodInfo.code}|}">&#x270E; Edycja produktu</a>
             </li>
         </th:block>
     </ul>

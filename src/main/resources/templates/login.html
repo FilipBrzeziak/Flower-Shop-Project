@@ -5,6 +5,42 @@
     <meta charset="UTF-8">
     <title>Logowanie</title>
     <link rel="stylesheet" type="text/css" th:href="@{/styles.css}">
+    <style>
+
+        .login-container {
+            background-color: #f2f2f2;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 0 auto;
+            width: 50%;
+        }
+
+        .error-message {
+            color: crimson;
+            margin-top: 10px;
+        }
+
+        table {
+            width: 100%;
+        }
+
+        td {
+            padding: 10px;
+        }
+
+        input[type="submit"], input[type="reset"] {
+            padding: 10px 20px;
+            background-color: #333333;
+            border-radius: 30px;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+        }
+
+        input[type="submit"]:hover, input[type="reset"]:hover {
+            background-color: #005580;
+        }
+    </style>
 </head>
 <body>
 <th:block th:include="/_header"></th:block>

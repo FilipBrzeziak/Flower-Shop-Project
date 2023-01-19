@@ -5,6 +5,18 @@
     <meta charset="UTF-8">
     <title>Uzupełnij dane dostawy</title>
     <link rel="stylesheet" type="text/css" th:href="@{/styles.css}">
+    <style>
+        /* Przyciski */
+        input[type="submit"],
+        input[type="reset"] {
+            background: #85A4E4;
+            color: white;
+            border-radius: 30px;
+            border-color: #85A4E4;
+            padding: 0.5em 1em;
+            cursor: pointer;
+        }
+    </style>
 </head>
 <body>
 <th:block th:include="/_header"></th:block>
@@ -25,7 +37,7 @@
         </tr>
         <tr>
             <td>Email *</td>
-            <td><input th:field="*{email}" /></td>
+            <td><input  th:field="*{email}" /></td>
             <td>
                   <span class="error-message"
                         th:if="${#fields.hasErrors('email')}" th:errors="*{email}">..</span>
@@ -33,7 +45,7 @@
         </tr>
         <tr>
             <td>Numer tel. *</td>
-            <td><input th:field="*{phone}" /></td>
+            <td><input type="tel" th:field="*{phone}" /></td>
             <td>
                   <span class="error-message"
                         th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}">..</span>

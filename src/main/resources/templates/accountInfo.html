@@ -5,29 +5,68 @@
     <meta charset="UTF-8">
     <title>Informacje o koncie</title>
     <link rel="stylesheet" type="text/css" th:href="@{/styles.css}">
+    <style>
+        /* Ogólne style */
 
+        /* Sekcja z informacjami o koncie */
+        .account-container {
+            font-size: x-large;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f2f2f2;
+            border-radius: 10px;
+        }
+
+        .account-container ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .account-container li {
+            margin-bottom: 1em;
+        }
+
+        /* Przycisk Edytuj */
+        .btn-zmiana {
+            background: #85A4E4;
+            color: white;
+            padding: 8px 30px;
+            margin: 30px 0;
+            border-radius: 30px;
+            border-color: #85A4E4;
+            cursor: pointer;
+        }
+
+        .btn-zmiana:hover {
+            background-color: #005580;
+        }
+
+    </style>
 </head>
-<body>
 
+<body>
+<!-- Nagłówek -->
 <th:block th:include="/_header"></th:block>
+<!-- Menu -->
 <th:block th:include="/_menu"></th:block>
 
 <div class="page-title">Informacje o koncie</div>
-
-<div class="account-container" >
+<div class="account-container">
     <ul>
-        <li>Nazwa użytkownika:<span th:utext="${accountInfo.getUserName()}"></span></li>
-        <li>Czy konto aktywne:<span th:utext="${accountInfo.isActive()}"></span></li>
+        <li>Nazwa użytkownika: <span th:utext="${accountInfo.getUserName()}"></span></li>
+        <li>Czy konto aktywne: <span th:utext="${accountInfo.isActive()}"></span></li>
         <li>Imię: <span th:utext="${accountInfo.getName()}"></span></li>
         <li>Nazwisko: <span th:utext="${accountInfo.getLastName()}"></span></li>
         <li>Email: <span th:utext="${accountInfo.getEmail()}"></span></li>
         <li>Numer telefonu: <span th:utext="${accountInfo.getPhoneNumber()}"></span></li>
         <li>Adres: <span th:utext="${accountInfo.getAddress()}"></span></li>
         <li>Miasto: <span th:utext="${accountInfo.getCity()}"></span></li>
-
     </ul>
     <a th:href="@{/shop/editAccountDetails}" target="_parent">
         <button class="btn-zmiana">Edytuj</button>
-    </a></div>
+    </a>
+</div>
 </body>
 </html>

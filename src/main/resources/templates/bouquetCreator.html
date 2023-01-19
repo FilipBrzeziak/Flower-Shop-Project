@@ -8,9 +8,10 @@
     <link rel="stylesheet" type="text/css" th:href="@{/styles.css}">
     <style>
         /* Ogólne style */
-        
+
         form {
-            max-width: 600px;
+            font-size: x-large;
+            max-width: 800px;
             margin: 0 auto;
             padding: 20px;
             background-color: #f2f2f2;
@@ -45,6 +46,9 @@
             border-color: #85A4E4;
             cursor: pointer;
         }
+        .btn-create:hover {
+            background-color: #005580;
+        }
 
         /* Style dla pola tekstowego */
         input[type='number'] {
@@ -56,10 +60,7 @@
             border-radius: 4px;
             box-sizing: border-box;
         }
-        #flower-image {
-            width: 300px;
-            border-radius: 10px;
-        }
+
         .add-on-images-c, .add-on-images-d, .add-on-images-f{
             width: 300px;
             height: 300px;
@@ -93,7 +94,7 @@
     <br>
 
     <label for="quantity">Ilość:</label>
-    <input type="number" id="quantity" name="quantity" min="1" max="50">
+    <input type="number" id="quantity" name="quantity" min="1" max="50" required>
 
     <br>
 
@@ -124,14 +125,14 @@
     <br>
     <img id="bunch.jpg" src="../static/images/bunch.jpg" th:src="@{/images/bunch.jpg}" alt="Bunch" class="add-on-images-c" style="display:none;">
     <img id="tied.jpg" src="../static/images/tied.jpg" th:src="@{/images/tied.jpg}" alt="Tied" class="add-on-images-c" style="display:none;">
-    <img id="box.jpg" src="../static/images/box.jpg" th:src="@{/images/bow.jpg}" alt="Box" class="add-on-images-c" style="display:none;">
+    <img id="box.jpg" src="../static/images/box.jpg" th:src="@{/images/box.jpg}" alt="Box" class="add-on-images-c" style="display:none;">
     <img id="rim.jpg" src="../static/images/rim.jpg" th:src="@{/images/rim.jpg}" alt="Rim" class="add-on-images-c" style="display:none;">
     <img id="basket.jpg" src="../static/images/basket.jpg" th:src="@{/images/basket.jpg}" alt="Basket" class="add-on-images-c" style="display:none;">
 
 
     <br><br>
 
-    <button type="submit">Stwórz bukiet</button>
+    <button class="btn-create" type="submit">Stwórz bukiet</button>
 </form>
 <script>
     function changeFlowerImage() {

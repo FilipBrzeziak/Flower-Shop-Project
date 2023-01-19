@@ -5,70 +5,156 @@
     <meta charset="UTF-8">
     <title>Podsumowanie Koszyka</title>
     <link rel="stylesheet" type="text/css" th:href="@{/styles.css}">
+    <style>
+
+        .summary-container{
+            font-size: large;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f2f2f2;
+            border-radius: 10px;
+        }
+            /* customer info container styles */
+        .customer-info-container {
+            margin: 0 auto;
+
+        }
+
+        .customer-info-container h3 {
+            margin-bottom: 10px;
+        }
+
+        .customer-info-container ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .customer-info-container ul li {
+            margin: 10px 0;
+        }
+
+        .customer-info-container .total {
+            color: crimson;
+            font-weight: bold;
+        }
+
+        /* login container styles */
+        .login-container {
+
+            margin: 0 auto;
+        }
+
+        .login-container h3 {
+            margin-bottom: 10px;
+        }
+
+        .login-container table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .login-container table tr td {
+            padding: 10px;
+        }
+
+        .login-container .error-message {
+            color: #ff0000;
+        }
+
+        /* shopping cart confirmation styles */
+        .button-send-sc {
+            background-color: #85A4E4;
+            color: white;
+            padding: 8px 30px;
+            border: none;
+            cursor: pointer;
+            border-radius: 30px;
+            margin: 30px 0;
+        }
+
+        
+        .navi-item {
+            display: inline-block;
+            text-decoration: none;
+            color: #333;
+            padding: 8px 30px;
+            margin: 30px 0;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+        }
+
+        .navi-item:hover {
+            background-color:#6f777d;
+        }
+
+
+    </style>
 </head>
 <body>
 <th:block th:include="/_header"></th:block>
 <th:block th:include="/_menu"></th:block>
 
 <div class="page-title">Podsumowanie</div>
-<div class="customer-info-container">
-    <h3>Dane dostawy:</h3>
-    <ul>
-        <li>Nazwa: <span th:utext="${myCart.customerInfo.name}"></span></li>
-        <li>Email: <span th:utext="${myCart.customerInfo.email}"></span></li>
-        <li>Numer tel.: <span th:utext="${myCart.customerInfo.phone}"></span></li>
-        <li>Adres: <span th:utext="${myCart.customerInfo.address}"></span></li>
-    </ul>
-    <h3>Podumowanie koszyka:</h3>
-    <ul>
-        <li>Ilość: <span th:utext="${myCart.quantityTotal}"></span>$</li>
-        <li>Razem:
-            <span class="total"
-                  th:utext="${#numbers.formatDecimal(myCart.amountTotal,3,2,'COMMA')}">
-               </span>
-        </li>
-    </ul>
-</div>
-<form method="POST" th:action="@{/shoppingCartConfirmation}">
-    <!-- Edit Cart -->
-    <a class="navi-item" th:href="@{/shoppingCart}">
-        Edycja koszyka
-    </a>
-    <!-- Edit Customer Info -->
-    <a class="navi-item" th:href="@{/shoppingCartCustomer}">
-        Edycja danych dostawy
-    </a>
-    <!-- Send/Save -->
-    <input type="submit" value="Wyślij" class="button-send-sc" />
-</form>
-<div class="container">
-    <div class="product-preview-container" th:each="cartLineInfo : ${myCart.cartLines}">
+<div class="summary-container">
+    <div class="customer-info-container">
+        <h3>Dane dostawy:</h3>
         <ul>
-            <li>
-                <img class="product-image"
-                     src="@{|/productImage?code=${cartLineInfo.productInfo.code}|}" />
-            </li>
-            <li>
-                Kod: <span th:utext="${cartLineInfo.productInfo.code}"></span>
-                <input
-                        type="hidden" name="code" th:value="${cartLineInfo.productInfo.code}" />
-            </li>
-            <li>Nazwa: <span th:utext="${cartLineInfo.productInfo.name}"></span></li>
-            <li>Cena:
-                <span class="price"
-                      th:utext="${#numbers.formatDecimal(cartLineInfo.productInfo.price,3,2,'COMMA')}">
-                  </span>
-            </li>
-            <li>Ilość: <span th:utext="${cartLineInfo.quantity}"></span></li>
-            <li>Suma:
-                <span class="subtotal"
-                      th:utext="${#numbers.formatDecimal(cartLineInfo.amount,3,2,'COMMA')}">
-                  </span>
+            <li>Nazwa: <span th:utext="${myCart.customerInfo.name}"></span></li>
+            <li>Email: <span th:utext="${myCart.customerInfo.email}"></span></li>
+            <li>Numer tel.: <span th:utext="${myCart.customerInfo.phone}"></span></li>
+            <li>Adres: <span th:utext="${myCart.customerInfo.address}"></span></li>
+        </ul>
+        <h3>Podsumowanie koszyka:</h3>
+        <ul>
+            <li>Ilość: <span th:utext="${myCart.quantityTotal}"></span></li>
+            <li>Razem:
+                <span class="total"
+                      th:utext="${#numbers.formatDecimal(myCart.amountTotal,3,2,'COMMA').replaceAll('^0+(?!$)', '')}">
+               </span>
             </li>
         </ul>
     </div>
+    <form method="POST" th:action="@{/shoppingCartConfirmation}">
+        <!-- Edit Cart -->
+        <a class="navi-item" th:href="@{/shoppingCart}">
+            Edycja koszyka
+        </a>
+        <!-- Edit Customer Info -->
+        <a class="navi-item" th:href="@{/shoppingCartCustomer}">
+            Edycja danych dostawy
+        </a>
+        <!-- Send/Save -->
+        <input type="submit" value="Wyślij" class="button-send-sc"/>
+    </form>
+    <div class="container-products">
+        <div class="product-preview-container" th:each="cartLineInfo : ${myCart.cartLines}">
+            <ul>
+                <li>
+                    <img class="product-image"
+                         src="@{|/productImage?code=${cartLineInfo.productInfo.code}|}"/>
+                </li>
+                <li>
+                    Kod: <span th:utext="${cartLineInfo.productInfo.code}"></span>
+                    <input
+                            type="hidden" name="code" th:value="${cartLineInfo.productInfo.code}"/>
+                </li>
+                <li>Nazwa: <span th:utext="${cartLineInfo.productInfo.name}"></span></li>
+                <li>Cena:
+                    <span class="price"
+                          th:utext="${#numbers.formatDecimal(cartLineInfo.productInfo.price,3,2,'COMMA').replaceAll('^0+(?!$)', '')}">
+                  </span>
+                </li>
+                <li>Ilość: <span th:utext="${cartLineInfo.quantity}"></span></li>
+                <li>Suma:
+                    <span class="subtotal"
+                          th:utext="${#numbers.formatDecimal(cartLineInfo.amount,3,2,'COMMA').replaceAll('^0+(?!$)', '')}">
+                  </span>
+                </li>
+            </ul>
+        </div>
+    </div>
 </div>
-
 
 </body>
 </html>
