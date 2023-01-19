@@ -6,10 +6,7 @@ import com.example.flowershopproject.dao.ProductDAO;
 import com.example.flowershopproject.entity.Account;
 import com.example.flowershopproject.entity.Product;
 import com.example.flowershopproject.form.ProductForm;
-import com.example.flowershopproject.model.AccountInfo;
-import com.example.flowershopproject.model.CartInfo;
-import com.example.flowershopproject.model.OrderDetailInfo;
-import com.example.flowershopproject.model.OrderInfo;
+import com.example.flowershopproject.model.*;
 import com.example.flowershopproject.pagination.PaginationResult;
 import com.example.flowershopproject.service.UserDetailsServiceImpl;
 import com.example.flowershopproject.utils.Utils;
@@ -43,6 +40,7 @@ public class UserController {
 
     @Autowired
     private ProductFormValidator productFormValidator;
+    private long bouquetNumber = 1;
 
     @InitBinder
     public void myInitBinder(WebDataBinder dataBinder) {
@@ -57,12 +55,12 @@ public class UserController {
         }
     }
 
-    @RequestMapping(value = { "/shop/login" }, method = RequestMethod.GET)
+    @RequestMapping(value = {"/shop/login"}, method = RequestMethod.GET)
     public String login() {
         return "login";
     }
 
-    @RequestMapping(value = { "/shop/accountInfo" }, method = RequestMethod.GET)
+    @RequestMapping(value = {"/shop/accountInfo"}, method = RequestMethod.GET)
     public String accountInfo(Model model) {
         UserDetails simpleDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         Account account = accountDAO.findAccount(simpleDetails.getUsername());
@@ -73,7 +71,7 @@ public class UserController {
         return "accountInfo";
     }
 
-    @RequestMapping(value = { "/shop/editAccountDetails" }, method = {RequestMethod.GET})
+    @RequestMapping(value = {"/shop/editAccountDetails"}, method = {RequestMethod.GET})
     public String editAccountDetails(Model model) {
         UserDetails simpleDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         Account account = accountDAO.findAccount(simpleDetails.getUsername());
@@ -83,14 +81,15 @@ public class UserController {
         model.addAttribute("accountInfo", accountInfo);
         return "editAccountDetails";
     }
-    @RequestMapping(value = { "/shop/editAccountDetails" }, method = {RequestMethod.POST})
-    public String editAccountDetails(Model model, @ModelAttribute("accountInfo") AccountInfo accountInfo ) {
+
+    @RequestMapping(value = {"/shop/editAccountDetails"}, method = {RequestMethod.POST})
+    public String editAccountDetails(Model model, @ModelAttribute("accountInfo") AccountInfo accountInfo) {
         UserDetails simpleDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        accountDAO.updateAccount(simpleDetails.getUsername(),accountInfo.getEmail(),accountInfo.getPhoneNumber(),accountInfo.getAddress(),accountInfo.getName(),accountInfo.getLastName(),accountInfo.getCity());
+        accountDAO.updateAccount(simpleDetails.getUsername(), accountInfo.getEmail(), accountInfo.getPhoneNumber(), accountInfo.getAddress(), accountInfo.getName(), accountInfo.getLastName(), accountInfo.getCity());
         return "accountInfo";
     }
 
-    @RequestMapping(value = { "/shop/userOrderList" }, method = RequestMethod.GET)
+    @RequestMapping(value = {"/shop/userOrderList"}, method = RequestMethod.GET)
     public String userOrderList(Model model, @RequestParam(value = "page", defaultValue = "1") String pageStr) {
         UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         int page = 1;
@@ -108,7 +107,7 @@ public class UserController {
         return "orderList";
     }
 
-    @RequestMapping(value = { "/shop/orderList" }, method = RequestMethod.GET)
+    @RequestMapping(value = {"/shop/orderList"}, method = RequestMethod.GET)
     public String orderList(Model model, @RequestParam(value = "page", defaultValue = "1") String pageStr) {
         int page = 1;
         try {
@@ -125,7 +124,7 @@ public class UserController {
         return "orderList";
     }
 
-    @RequestMapping(value = { "/shop/product" }, method = RequestMethod.GET)
+    @RequestMapping(value = {"/shop/product"}, method = RequestMethod.GET)
     public String product(Model model, @RequestParam(value = "code", defaultValue = "") String code) {
         ProductForm productForm = null;
 
@@ -143,7 +142,7 @@ public class UserController {
         return "product";
     }
 
-    @RequestMapping(value = { "/shop/product" }, method = RequestMethod.POST)
+    @RequestMapping(value = {"/shop/product"}, method = RequestMethod.POST)
     public String productSave(Model model, @ModelAttribute("productForm") @Validated ProductForm productForm,
                               BindingResult result) {
         if (result.hasErrors()) {
@@ -166,12 +165,47 @@ public class UserController {
     }
 
     @RequestMapping(value = {"/shop/bouquetCreator"}, method = RequestMethod.POST)
-    public String createbouquetCreator(HttpServletRequest request, Model model) {
-       return "redirect:/shoppingCart";
+    public String createbouquetCreator(HttpServletRequest request, String flowerSelect, String quantity,
+                                       String addition, String typeOfBouquet, Model model) {
+        Product product1 = null;
+        Product product2 = null;
+        Product product3 = null;
+        CartInfo cartInfo = Utils.getCartInSession(request);
+
+        if (flowerSelect != null && flowerSelect.length() > 0) {
+            product1 = productDAO.findProduct(flowerSelect);
+        }
+        if (product1 != null) {
+
+            ProductInfo productInfo = new ProductInfo(product1);
+            productInfo.setName("Bukiet " + bouquetNumber + " " + productInfo.getName());
+            cartInfo.addProduct(productInfo, Integer.parseInt(quantity));
+        }
+
+        if (addition != null && addition.length() > 0) {
+            product2 = productDAO.findProduct(addition);
+        }
+        if (product2 != null) {
+
+            ProductInfo productInfo = new ProductInfo(product2);
+            productInfo.setName("Bukiet " + bouquetNumber + " " + productInfo.getName());
+            cartInfo.addProduct(productInfo, 1);
+        }
+
+        if (typeOfBouquet != null && typeOfBouquet.length() > 0) {
+            product3 = productDAO.findProduct(typeOfBouquet);
+        }
+        if (product3 != null) {
+            ProductInfo productInfo = new ProductInfo(product3);
+            productInfo.setName("Bukiet " + bouquetNumber + " " + productInfo.getName());
+            cartInfo.addProduct(productInfo, 1);
+        }
+        bouquetNumber++;
+        return "redirect:/shoppingCart";
 
     }
 
-    @RequestMapping(value = { "/shop/order" }, method = RequestMethod.GET)
+    @RequestMapping(value = {"/shop/order"}, method = RequestMethod.GET)
     public String orderView(Model model, @RequestParam("orderId") String orderId) {
         OrderInfo orderInfo = null;
         if (orderId != null) {

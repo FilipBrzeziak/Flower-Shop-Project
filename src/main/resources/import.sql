@@ -119,3 +119,123 @@ values ('S005',
         'Papier',
         110,
         sysdate);
+
+insert into products (CODE,COLOUR,CATEGORY, NAME, PRICE, CREATE_DATE)
+values ('rose',
+        'czerwona',
+        'kwiat',
+        'Róża',
+        11,
+        sysdate);
+
+insert into products (CODE,COLOUR,CATEGORY, NAME, PRICE, CREATE_DATE)
+values ('rose',
+        'czerwony',
+        'kwiat',
+        'Róża',
+        11,
+        sysdate);
+
+insert into products (CODE,COLOUR,CATEGORY, NAME, PRICE, CREATE_DATE)
+values ('tulip',
+        'czerwony',
+        'kwiat',
+        'Tulipan',
+        13,
+        sysdate);
+
+insert into products (CODE,COLOUR,CATEGORY, NAME, PRICE, CREATE_DATE)
+values ('lily',
+        'zielony',
+        'kwiat',
+        'Lilia',
+        18,
+        sysdate);
+
+insert into products (CODE,COLOUR,CATEGORY, NAME, PRICE, CREATE_DATE)
+values ('daisy',
+        'biały',
+        'kwiat',
+        'Margaretka',
+        21,
+        sysdate);
+
+insert into products (CODE,COLOUR,CATEGORY, NAME, PRICE, CREATE_DATE)
+values ('sunflower',
+        'żółty',
+        'kwiat',
+        'Słonecznik',
+        8,
+        sysdate);
+
+insert into products (CODE,COLOUR,CATEGORY, NAME, PRICE, CREATE_DATE)
+values ('bunch',
+        'brak',
+        'kompozycja',
+        'Wiązanka',
+        8,
+        sysdate);
+
+insert into products (CODE,COLOUR,CATEGORY, NAME, PRICE, CREATE_DATE)
+values ('tied',
+        'brak',
+        'kompozycja',
+        'Bukiet wiązany',
+        8,
+        sysdate);
+
+insert into products (CODE,COLOUR,CATEGORY, NAME, PRICE, CREATE_DATE)
+values ('box',
+        'brak',
+        'kompozycja',
+        'Box',
+        8,
+        sysdate);
+
+insert into products (CODE,COLOUR,CATEGORY, NAME, PRICE, CREATE_DATE)
+values ('rim',
+        'brak',
+        'kompozycja',
+        'Wianek',
+        8,
+        sysdate);
+
+insert into products (CODE,COLOUR,CATEGORY, NAME, PRICE, CREATE_DATE)
+values ('basket',
+        'brak',
+        'kompozycja',
+        'Kosz',
+        5,
+        sysdate);
+
+insert into products (CODE,COLOUR,CATEGORY, NAME, PRICE, CREATE_DATE)
+values ('bow',
+        'różowy',
+        'dodatek',
+        'Wstążka',
+        5,
+        sysdate);
+
+insert into products (CODE,COLOUR,CATEGORY, NAME, PRICE, CREATE_DATE)
+values ('ribbon',
+        'czerwony',
+        'dodatek',
+        'Kokarda',
+        5,
+        sysdate);
+
+insert into products (CODE,COLOUR,CATEGORY, NAME, PRICE, CREATE_DATE)
+values ('card',
+        'brak',
+        'dodatek',
+        'Karteczka',
+        5,
+        sysdate);
+
+insert into products (CODE,COLOUR,CATEGORY, NAME, PRICE, CREATE_DATE)
+values ('heart',
+        'czerwony',
+        'dodatek',
+        'Serce',
+        5,
+        sysdate);
