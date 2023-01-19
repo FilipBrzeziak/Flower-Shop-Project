@@ -66,7 +66,7 @@
         <li>Kategoria: <span th:utext="${prodInfo.category}"></span></li>
         <li>Nazwa: <span th:utext="${prodInfo.name}"></span></li>
         <li>Kolor: <span th:utext="${prodInfo.colour}"></span></li>
-        <li>Cena: <span th:utext="${#numbers.formatDecimal(prodInfo.price,3,2,'COMMA')}"></span></li>
+        <li>Cena: <span th:utext="${#numbers.formatDecimal(prodInfo.price,3,2,'COMMA').replaceAll('^0+(?!$)', '')}"></span></li>
         <li>
             <a th:href="@{|/buyProduct?code=${prodInfo.code}|}">&#43; Dodaj do koszyka</a>
         </li>
